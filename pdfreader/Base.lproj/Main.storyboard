@@ -276,18 +276,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHx-Qm-yY6" userLabel="Group View">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
-                                <animations/>
-                                <connections>
-                                    <segue destination="bYw-pe-vA5" kind="embed" id="bF7-CN-Ncw"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fc-ja-KeA" userLabel="File View">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fc-ja-KeA" userLabel="组view">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                                 <animations/>
                                 <connections>
                                     <segue destination="nSO-Wu-Sfd" kind="embed" id="5Sw-9k-e3y"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHx-Qm-yY6" userLabel="文件View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="bYw-pe-vA5" kind="embed" id="bF7-CN-Ncw"/>
                                 </connections>
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="veu-es-sxe">
@@ -393,7 +393,7 @@
         <!--View Controller-->
         <scene sceneID="6V1-z6-YQH">
             <objects>
-                <viewController id="bYw-pe-vA5" sceneMemberID="viewController">
+                <viewController id="bYw-pe-vA5" customClass="PDFViewController" customModule="pdfreader" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="61m-Xo-Dk3"/>
                         <viewControllerLayoutGuide type="bottom" id="EFs-gc-v9J"/>
@@ -401,9 +401,58 @@
                     <view key="view" contentMode="scaleToFill" id="vfD-WF-xtA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziV-rA-KZK" userLabel="top view">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Poe-rz-VOe">
+                                        <rect key="frame" x="0.0" y="50" width="600" height="4"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="4" id="bEq-wC-suq"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMX-CM-t1d">
+                                        <rect key="frame" x="32" y="15" width="52.5" height="24"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Poe-rz-VOe" firstAttribute="leading" secondItem="ziV-rA-KZK" secondAttribute="leading" id="4E2-Lj-o2E"/>
+                                    <constraint firstAttribute="trailing" secondItem="Poe-rz-VOe" secondAttribute="trailing" id="D0Q-Sl-eA1"/>
+                                    <constraint firstAttribute="height" constant="54" id="EiK-ah-60T"/>
+                                    <constraint firstItem="JMX-CM-t1d" firstAttribute="leading" secondItem="ziV-rA-KZK" secondAttribute="leading" constant="32" id="bWM-AQ-9hq"/>
+                                    <constraint firstAttribute="bottom" secondItem="Poe-rz-VOe" secondAttribute="bottom" id="nQd-Eq-zX9"/>
+                                    <constraint firstItem="JMX-CM-t1d" firstAttribute="centerY" secondItem="ziV-rA-KZK" secondAttribute="centerY" id="qVK-Vb-HpD"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6I-Ix-Ufb" customClass="PDFPageView" customModule="pdfreader" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="54" width="600" height="451"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ziV-rA-KZK" firstAttribute="top" secondItem="61m-Xo-Dk3" secondAttribute="bottom" id="Dbe-cU-yXM"/>
+                            <constraint firstItem="ziV-rA-KZK" firstAttribute="leading" secondItem="vfD-WF-xtA" secondAttribute="leading" id="LVa-x3-f0w"/>
+                            <constraint firstItem="H6I-Ix-Ufb" firstAttribute="leading" secondItem="vfD-WF-xtA" secondAttribute="leading" id="RVj-XK-lwX"/>
+                            <constraint firstAttribute="trailing" secondItem="ziV-rA-KZK" secondAttribute="trailing" id="eEN-l7-SGP"/>
+                            <constraint firstItem="EFs-gc-v9J" firstAttribute="top" secondItem="H6I-Ix-Ufb" secondAttribute="bottom" id="f6e-ER-qgg"/>
+                            <constraint firstAttribute="trailing" secondItem="H6I-Ix-Ufb" secondAttribute="trailing" id="jlU-Ka-jx8"/>
+                            <constraint firstItem="H6I-Ix-Ufb" firstAttribute="top" secondItem="ziV-rA-KZK" secondAttribute="bottom" id="xYT-If-nox"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pageView" destination="H6I-Ix-Ufb" id="VmC-Sa-zLI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLZ-LV-haw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -510,10 +559,10 @@
             </objects>
             <point key="canvasLocation" x="1733" y="650.5"/>
         </scene>
-        <!--Sub List View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="HeO-td-YxA">
             <objects>
-                <tableViewController id="00r-HD-5Jb" customClass="MIBDSubListViewController" sceneMemberID="viewController">
+                <tableViewController id="00r-HD-5Jb" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="131" sectionHeaderHeight="22" sectionFooterHeight="22" id="dOF-e4-eb2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="383"/>
                         <animations/>
