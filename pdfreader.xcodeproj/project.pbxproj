@@ -75,6 +75,7 @@
 		F8227E561BF5942200A8F7A5 /* 内容 */ = {
 			isa = PBXGroup;
 			children = (
+				F899CDD31BF5BC6B006E96B1 /* PDf读取 */,
 				F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */,
 				F8227E571BF5942D00A8F7A5 /* 分组 */,
 			);
@@ -87,6 +88,13 @@
 				F8227E581BF5945200A8F7A5 /* GroupCell.swift */,
 			);
 			name = "分组";
+			sourceTree = "<group>";
+		};
+		F899CDD31BF5BC6B006E96B1 /* PDf读取 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "PDf读取";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
