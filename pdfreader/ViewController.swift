@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var menuContainerView: UIView!
     @IBOutlet weak var menuLeftEdge: NSLayoutConstraint!
 
-
     var showMenu = false {
         didSet {
             if showMenu {

@@ -13,6 +13,8 @@
 		F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F8227E461BF575FB00A8F7A5 /* pdfreader.xcdatamodeld */; };
 		F8227E4A1BF575FB00A8F7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8227E491BF575FB00A8F7A5 /* Assets.xcassets */; };
 		F8227E4D1BF575FB00A8F7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8227E4B1BF575FB00A8F7A5 /* LaunchScreen.storyboard */; };
+		F8227E551BF58FE100A8F7A5 /* ContentProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */; };
+		F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E581BF5945200A8F7A5 /* GroupCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		F8227E491BF575FB00A8F7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8227E4C1BF575FB00A8F7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8227E4E1BF575FB00A8F7A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProviderViewController.swift; sourceTree = "<group>"; };
+		F8227E581BF5945200A8F7A5 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		F8227E3E1BF575FB00A8F7A5 /* pdfreader */ = {
 			isa = PBXGroup;
 			children = (
+				F8227E561BF5942200A8F7A5 /* 内容 */,
 				F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */,
 				F8227E411BF575FB00A8F7A5 /* ViewController.swift */,
 				F8227E431BF575FB00A8F7A5 /* Main.storyboard */,
@@ -65,6 +70,23 @@
 				F8227E461BF575FB00A8F7A5 /* pdfreader.xcdatamodeld */,
 			);
 			path = pdfreader;
+			sourceTree = "<group>";
+		};
+		F8227E561BF5942200A8F7A5 /* 内容 */ = {
+			isa = PBXGroup;
+			children = (
+				F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */,
+				F8227E571BF5942D00A8F7A5 /* 分组 */,
+			);
+			name = "内容";
+			sourceTree = "<group>";
+		};
+		F8227E571BF5942D00A8F7A5 /* 分组 */ = {
+			isa = PBXGroup;
+			children = (
+				F8227E581BF5945200A8F7A5 /* GroupCell.swift */,
+			);
+			name = "分组";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,9 +161,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */,
 				F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */,
 				F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */,
 				F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */,
+				F8227E551BF58FE100A8F7A5 /* ContentProviderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +317,7 @@
 				F8227E531BF575FB00A8F7A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
