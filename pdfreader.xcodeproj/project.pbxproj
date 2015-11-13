@@ -11,10 +11,10 @@
 		F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E411BF575FB00A8F7A5 /* ViewController.swift */; };
 		F8227E451BF575FB00A8F7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8227E431BF575FB00A8F7A5 /* Main.storyboard */; };
 		F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F8227E461BF575FB00A8F7A5 /* pdfreader.xcdatamodeld */; };
-		F8227E4A1BF575FB00A8F7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8227E491BF575FB00A8F7A5 /* Assets.xcassets */; };
 		F8227E4D1BF575FB00A8F7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8227E4B1BF575FB00A8F7A5 /* LaunchScreen.storyboard */; };
 		F8227E551BF58FE100A8F7A5 /* ContentProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */; };
 		F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E581BF5945200A8F7A5 /* GroupCell.swift */; };
+		F899CDD21BF5BA93006E96B1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD11BF5BA93006E96B1 /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,11 +23,11 @@
 		F8227E411BF575FB00A8F7A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F8227E441BF575FB00A8F7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F8227E471BF575FB00A8F7A5 /* pdfreader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pdfreader.xcdatamodel; sourceTree = "<group>"; };
-		F8227E491BF575FB00A8F7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8227E4C1BF575FB00A8F7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8227E4E1BF575FB00A8F7A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProviderViewController.swift; sourceTree = "<group>"; };
 		F8227E581BF5945200A8F7A5 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		F899CDD11BF5BA93006E96B1 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +64,10 @@
 				F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */,
 				F8227E411BF575FB00A8F7A5 /* ViewController.swift */,
 				F8227E431BF575FB00A8F7A5 /* Main.storyboard */,
-				F8227E491BF575FB00A8F7A5 /* Assets.xcassets */,
 				F8227E4B1BF575FB00A8F7A5 /* LaunchScreen.storyboard */,
 				F8227E4E1BF575FB00A8F7A5 /* Info.plist */,
 				F8227E461BF575FB00A8F7A5 /* pdfreader.xcdatamodeld */,
+				F899CDD11BF5BA93006E96B1 /* Media.xcassets */,
 			);
 			path = pdfreader;
 			sourceTree = "<group>";
@@ -149,7 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8227E4D1BF575FB00A8F7A5 /* LaunchScreen.storyboard in Resources */,
-				F8227E4A1BF575FB00A8F7A5 /* Assets.xcassets in Resources */,
+				F899CDD21BF5BA93006E96B1 /* Media.xcassets in Resources */,
 				F8227E451BF575FB00A8F7A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
