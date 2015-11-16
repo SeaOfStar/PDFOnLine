@@ -27,6 +27,8 @@ class PDFPageView: UIView {
             CGContextTranslateCTM(context, 0, self.bounds.size.height);
             CGContextScaleCTM(context, 1.2, -1.2);
             CGContextDrawPDFPage(context, ref);
+
+//            print("rect\(rect)")
         }
         else {
             super.drawRect(rect)

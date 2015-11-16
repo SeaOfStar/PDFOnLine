@@ -13,8 +13,8 @@ class PDFViewController: UIViewController {
     var urlForPDF: NSURL?
     var pageCount = 0
 
-    @IBOutlet weak var pageView: PDFPageView!
 
+    @IBOutlet weak var PDFReader: PDFReaderView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +26,12 @@ class PDFViewController: UIViewController {
 //        }
 
         let path = NSBundle.mainBundle().pathForResource("人力资源管理平台", ofType: "pdf")
-        print("")
 
         let url = NSURL(fileURLWithPath: path!)
-        let document = CGPDFDocumentCreateWithURL(url)
-        pageCount = CGPDFDocumentGetNumberOfPages(document)
+//        let document = CGPDFDocumentCreateWithURL(url)
+//        pageCount = CGPDFDocumentGetNumberOfPages(document)
 
-        print("文件(\(pageCount)页)路径：\(path)")
-
-        self.pageView.pageRef = CGPDFDocumentGetPage(document, 7)
+        self.PDFReader.url = url
     }
 
     override func didReceiveMemoryWarning() {

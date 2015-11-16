@@ -18,6 +18,8 @@
 		F899CDD61BF5C218006E96B1 /* 人力资源管理平台.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */; };
 		F899CDD81BF5C238006E96B1 /* PDFPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDD71BF5C238006E96B1 /* PDFPageView.swift */; };
 		F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDD91BF5C828006E96B1 /* PDFViewController.swift */; };
+		F899CDDC1BF5D25C006E96B1 /* PDFPageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */; };
+		F899CDDE1BF5D362006E96B1 /* PDFReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "人力资源管理平台.pdf"; sourceTree = "<group>"; };
 		F899CDD71BF5C238006E96B1 /* PDFPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageView.swift; sourceTree = "<group>"; };
 		F899CDD91BF5C828006E96B1 /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageLayer.swift; sourceTree = "<group>"; };
+		F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFReaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 			children = (
 				F899CDD71BF5C238006E96B1 /* PDFPageView.swift */,
 				F899CDD91BF5C828006E96B1 /* PDFViewController.swift */,
+				F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */,
+				F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */,
 			);
 			name = "PDf读取";
 			sourceTree = "<group>";
@@ -188,8 +194,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F899CDD81BF5C238006E96B1 /* PDFPageView.swift in Sources */,
+				F899CDDC1BF5D25C006E96B1 /* PDFPageLayer.swift in Sources */,
 				F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */,
 				F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */,
+				F899CDDE1BF5D362006E96B1 /* PDFReaderView.swift in Sources */,
 				F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */,
 				F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */,
 				F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */,
