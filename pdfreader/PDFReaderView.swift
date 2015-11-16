@@ -56,7 +56,6 @@ class PDFReaderView: UIView {
     var pageCount = 0
     var index = 0 {     // 0起始
         didSet {
-
             // 动画数组
             let group = CAAnimationGroup()
             group.duration = 0.7
@@ -66,12 +65,6 @@ class PDFReaderView: UIView {
             // 修改当前的layer
             if let old = currentPageLayer {
                 old.removeFromSuperlayer()
-//                let hideAnimation = CABasicAnimation(keyPath: "opacity")
-//                hideAnimation.fromValue = 1.0
-//                hideAnimation.toValue = 0.0
-//
-//                group.animations?.append(hideAnimation)
-//                old.addAnimation(hideAnimation, forKey: "隐藏")
             }
 
             let page = PDFPageLayer()
