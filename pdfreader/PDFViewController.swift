@@ -41,7 +41,7 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
     }
 
     func didReachTopOfPDFView(view: PDFReaderView) {
-        let path = NSBundle.mainBundle().pathForResource("其他行业", ofType: "pdf")
+        let path = NSBundle.mainBundle().pathForResource("特别关注介绍", ofType: "pdf")
         let url = NSURL(fileURLWithPath: path!)
         view.url = url
     }
