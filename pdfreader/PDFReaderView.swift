@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PDFReaderViewDelegate: NSObjectProtocol {
-    func didReachTheEndOfPDFView(view :PDFReaderView)
+    func didReachEndOfPDFView(view :PDFReaderView)
     func didReachTopOfPDFView(view :PDFReaderView)
 }
 
@@ -105,7 +105,7 @@ class PDFReaderView: UIView {
     func nextPage() ->Bool {
         if pageCount <= 0 {
             // 没有数据
-            self.delegate?.didReachTheEndOfPDFView(self)
+            self.delegate?.didReachEndOfPDFView(self)
             return false
         }
 
@@ -115,7 +115,7 @@ class PDFReaderView: UIView {
                 next = 0
             }
             else {
-                self.delegate?.didReachTheEndOfPDFView(self)
+                self.delegate?.didReachEndOfPDFView(self)
                 return false
             }
         }
@@ -133,6 +133,7 @@ class PDFReaderView: UIView {
         let last = index - 1
         if last >= 0 {
             self.index = last
+            return true
         }
         else {
             if circlePage {

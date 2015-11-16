@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PDFViewController: UIViewController {
+class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
     var urlForPDF: NSURL?
     var pageCount = 0
@@ -22,16 +22,29 @@ class PDFViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         let path = NSBundle.mainBundle().pathForResource("人力资源管理平台", ofType: "pdf")
-
         let url = NSURL(fileURLWithPath: path!)
+
         self.PDFReader.url = url
+        self.PDFReader.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+
+    func didReachEndOfPDFView(view: PDFReaderView) {
+        let path = NSBundle.mainBundle().pathForResource("华信云数据中心服务手册", ofType: "pdf")
+        let url = NSURL(fileURLWithPath: path!)
+        view.url = url
+    }
+
+    func didReachTopOfPDFView(view: PDFReaderView) {
+        let path = NSBundle.mainBundle().pathForResource("其他行业", ofType: "pdf")
+        let url = NSURL(fileURLWithPath: path!)
+        view.url = url
+    }
 
     /*
     // MARK: - Navigation
