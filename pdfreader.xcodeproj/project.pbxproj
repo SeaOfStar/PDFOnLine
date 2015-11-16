@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8160ADE1BF9A6080077898B /* TreeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160AD81BF9A6080077898B /* TreeEntity+CoreDataProperties.swift */; };
+		F8160ADF1BF9A6080077898B /* TreeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160AD91BF9A6080077898B /* TreeEntity.swift */; };
+		F8160AE01BF9A6080077898B /* GroupEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160ADA1BF9A6080077898B /* GroupEntity+CoreDataProperties.swift */; };
+		F8160AE11BF9A6080077898B /* GroupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160ADB1BF9A6080077898B /* GroupEntity.swift */; };
+		F8160AE21BF9A6080077898B /* FileEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160ADC1BF9A6080077898B /* FileEntity+CoreDataProperties.swift */; };
+		F8160AE31BF9A6080077898B /* FileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160ADD1BF9A6080077898B /* FileEntity.swift */; };
 		F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */; };
 		F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E411BF575FB00A8F7A5 /* ViewController.swift */; };
 		F8227E451BF575FB00A8F7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8227E431BF575FB00A8F7A5 /* Main.storyboard */; };
@@ -16,13 +22,18 @@
 		F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E581BF5945200A8F7A5 /* GroupCell.swift */; };
 		F899CDD21BF5BA93006E96B1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD11BF5BA93006E96B1 /* Media.xcassets */; };
 		F899CDD61BF5C218006E96B1 /* 人力资源管理平台.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */; };
-		F899CDD81BF5C238006E96B1 /* PDFPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDD71BF5C238006E96B1 /* PDFPageView.swift */; };
 		F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDD91BF5C828006E96B1 /* PDFViewController.swift */; };
 		F899CDDC1BF5D25C006E96B1 /* PDFPageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */; };
 		F899CDDE1BF5D362006E96B1 /* PDFReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F8160AD81BF9A6080077898B /* TreeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TreeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8160AD91BF9A6080077898B /* TreeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeEntity.swift; sourceTree = "<group>"; };
+		F8160ADA1BF9A6080077898B /* GroupEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GroupEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8160ADB1BF9A6080077898B /* GroupEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupEntity.swift; sourceTree = "<group>"; };
+		F8160ADC1BF9A6080077898B /* FileEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8160ADD1BF9A6080077898B /* FileEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileEntity.swift; sourceTree = "<group>"; };
 		F8227E3C1BF575FB00A8F7A5 /* pdfreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pdfreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8227E411BF575FB00A8F7A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,7 +45,6 @@
 		F8227E581BF5945200A8F7A5 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		F899CDD11BF5BA93006E96B1 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "人力资源管理平台.pdf"; sourceTree = "<group>"; };
-		F899CDD71BF5C238006E96B1 /* PDFPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageView.swift; sourceTree = "<group>"; };
 		F899CDD91BF5C828006E96B1 /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageLayer.swift; sourceTree = "<group>"; };
 		F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFReaderView.swift; sourceTree = "<group>"; };
@@ -51,6 +61,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8160AD71BF9A5CE0077898B /* 数据模型 */ = {
+			isa = PBXGroup;
+			children = (
+				F8160AD81BF9A6080077898B /* TreeEntity+CoreDataProperties.swift */,
+				F8160AD91BF9A6080077898B /* TreeEntity.swift */,
+				F8160ADA1BF9A6080077898B /* GroupEntity+CoreDataProperties.swift */,
+				F8160ADB1BF9A6080077898B /* GroupEntity.swift */,
+				F8160ADC1BF9A6080077898B /* FileEntity+CoreDataProperties.swift */,
+				F8160ADD1BF9A6080077898B /* FileEntity.swift */,
+			);
+			name = "数据模型";
+			sourceTree = "<group>";
+		};
 		F8227E331BF575FB00A8F7A5 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +94,7 @@
 		F8227E3E1BF575FB00A8F7A5 /* pdfreader */ = {
 			isa = PBXGroup;
 			children = (
+				F8160AD71BF9A5CE0077898B /* 数据模型 */,
 				F8227E561BF5942200A8F7A5 /* 内容 */,
 				F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */,
 				F8227E411BF575FB00A8F7A5 /* ViewController.swift */,
@@ -104,7 +128,6 @@
 		F899CDD31BF5BC6B006E96B1 /* PDf读取 */ = {
 			isa = PBXGroup;
 			children = (
-				F899CDD71BF5C238006E96B1 /* PDFPageView.swift */,
 				F899CDD91BF5C828006E96B1 /* PDFViewController.swift */,
 				F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */,
 				F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */,
@@ -193,14 +216,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F899CDD81BF5C238006E96B1 /* PDFPageView.swift in Sources */,
+				F8160AE31BF9A6080077898B /* FileEntity.swift in Sources */,
 				F899CDDC1BF5D25C006E96B1 /* PDFPageLayer.swift in Sources */,
 				F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */,
 				F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */,
 				F899CDDE1BF5D362006E96B1 /* PDFReaderView.swift in Sources */,
 				F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */,
 				F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */,
+				F8160AE21BF9A6080077898B /* FileEntity+CoreDataProperties.swift in Sources */,
+				F8160ADF1BF9A6080077898B /* TreeEntity.swift in Sources */,
 				F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */,
+				F8160AE01BF9A6080077898B /* GroupEntity+CoreDataProperties.swift in Sources */,
+				F8160ADE1BF9A6080077898B /* TreeEntity+CoreDataProperties.swift in Sources */,
+				F8160AE11BF9A6080077898B /* GroupEntity.swift in Sources */,
 				F8227E551BF58FE100A8F7A5 /* ContentProviderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

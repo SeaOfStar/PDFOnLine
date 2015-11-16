@@ -10,10 +10,13 @@ import UIKit
 
 protocol PDFReaderViewDelegate: NSObjectProtocol {
     func didReachTheEndOfPDFView(view :PDFReaderView)
+    func didReachTopOfPDFView(view :PDFReaderView)
 }
 
 
 class PDFReaderView: UIView {
+
+    weak var delegate :PDFReaderViewDelegate?
 
     // 构造函数
     override init(frame: CGRect) {
@@ -102,6 +105,7 @@ class PDFReaderView: UIView {
     func nextPage() ->Bool {
         if pageCount <= 0 {
             // 没有数据
+            self.delegate?.didReachTheEndOfPDFView(self)
             return false
         }
 
@@ -111,6 +115,7 @@ class PDFReaderView: UIView {
                 next = 0
             }
             else {
+                self.delegate?.didReachTheEndOfPDFView(self)
                 return false
             }
         }
@@ -121,6 +126,7 @@ class PDFReaderView: UIView {
     func lastPage() ->Bool {
         if pageCount <= 0 {
             // 没有数据
+            self.delegate?.didReachTopOfPDFView(self)
             return false
         }
 
@@ -134,7 +140,8 @@ class PDFReaderView: UIView {
                 return true
             }
         }
-
+        
+        self.delegate?.didReachTopOfPDFView(self)
         return false
     }
 

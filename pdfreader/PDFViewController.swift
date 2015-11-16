@@ -21,16 +21,9 @@ class PDFViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-//        if let url = urlForPDF {
-//
-//        }
-
         let path = NSBundle.mainBundle().pathForResource("人力资源管理平台", ofType: "pdf")
 
         let url = NSURL(fileURLWithPath: path!)
-//        let document = CGPDFDocumentCreateWithURL(url)
-//        pageCount = CGPDFDocumentGetNumberOfPages(document)
-
         self.PDFReader.url = url
     }
 

@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+    <entity name="FileEntity" representedClassName=".FileEntity" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="dataURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fileID" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="fingerprint" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="iconURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="ownerGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroupEntity" inverseName="files" inverseEntity="GroupEntity" syncable="YES"/>
+    </entity>
+    <entity name="GroupEntity" representedClassName=".GroupEntity" syncable="YES">
+        <attribute name="colorAlpha" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="colorBlue" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="colorGreen" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="colorRed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="groupID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameInEnglish" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FileEntity" inverseName="ownerGroup" inverseEntity="FileEntity" syncable="YES"/>
+        <relationship name="root" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TreeEntity" inverseName="groups" inverseEntity="TreeEntity" syncable="YES"/>
+    </entity>
+    <entity name="TreeEntity" representedClassName=".TreeEntity" syncable="YES">
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GroupEntity" inverseName="root" inverseEntity="GroupEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="FileEntity" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="GroupEntity" positionX="-54" positionY="54" width="128" height="180"/>
+        <element name="TreeEntity" positionX="-36" positionY="63" width="128" height="75"/>
+    </elements>
 </model>
