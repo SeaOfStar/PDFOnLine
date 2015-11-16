@@ -10,10 +10,6 @@ import UIKit
 
 class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
-    var urlForPDF: NSURL?
-    var pageCount = 0
-
-
     @IBOutlet weak var PDFReader: PDFReaderView!
 
     override func viewDidLoad() {

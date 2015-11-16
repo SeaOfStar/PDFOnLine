@@ -45,7 +45,19 @@ class PDFReaderView: UIView {
 
     var url: NSURL? {
         didSet {
-            self.document = CGPDFDocumentCreateWithURL(url)
+            if let theURL = url {
+                self.document = CGPDFDocumentCreateWithURL(theURL)
+                self.data = nil
+            }
+        }
+    }
+
+    var data: NSData? {
+        didSet {
+            if let theData = data {
+                self.document = CGPDFDocumentCreateWithProvider(CGDataProviderCreateWithCFData(theData))
+                self.url = nil
+            }
         }
     }
 
