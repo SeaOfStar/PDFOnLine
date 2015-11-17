@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
-    <entity name="FileEntity" representedClassName=".FileEntity" syncable="YES">
+    <entity name="BinaryEntity" representedClassName=".BinaryEntity" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="dataURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteURL" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="filesData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FileEntity" inverseName="data" inverseEntity="FileEntity" syncable="YES"/>
+        <relationship name="filesIcon" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FileEntity" inverseName="icon" inverseEntity="FileEntity" syncable="YES"/>
+    </entity>
+    <entity name="FileEntity" representedClassName=".FileEntity" syncable="YES">
         <attribute name="fileID" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="fingerprint" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="iconURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BinaryEntity" inverseName="filesData" inverseEntity="BinaryEntity" syncable="YES"/>
+        <relationship name="icon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BinaryEntity" inverseName="filesIcon" inverseEntity="BinaryEntity" syncable="YES"/>
         <relationship name="ownerGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroupEntity" inverseName="files" inverseEntity="GroupEntity" syncable="YES"/>
     </entity>
     <entity name="GroupEntity" representedClassName=".GroupEntity" syncable="YES">
@@ -27,8 +30,9 @@
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GroupEntity" inverseName="root" inverseEntity="GroupEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FileEntity" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="FileEntity" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="GroupEntity" positionX="-54" positionY="54" width="128" height="180"/>
         <element name="TreeEntity" positionX="-36" positionY="63" width="128" height="75"/>
+        <element name="BinaryEntity" positionX="-54" positionY="90" width="128" height="105"/>
     </elements>
 </model>

@@ -1,5 +1,5 @@
 //
-//  FileEntity+CoreDataProperties.swift
+//  BinaryEntity+CoreDataProperties.swift
 //  pdfreader
 //
 //  Created by 吴向东 on 15/11/17.
@@ -12,13 +12,11 @@
 import Foundation
 import CoreData
 
-extension FileEntity {
+extension BinaryEntity {
 
-    @NSManaged var fileID: String?
-    @NSManaged var name: String?
-    @NSManaged var tag: String?
-    @NSManaged var ownerGroup: GroupEntity?
-    @NSManaged var data: BinaryEntity?
-    @NSManaged var icon: BinaryEntity?
+    @NSManaged var remoteURL: String?
+    @NSManaged var data: NSData?
+    @NSManaged var filesData: NSSet?
+    @NSManaged var filesIcon: NSSet?
 
 }

@@ -16,6 +16,7 @@
 		F8160AE61BF9B9BC0077898B /* 华信云数据中心服务手册.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F8160AE41BF9B9BC0077898B /* 华信云数据中心服务手册.pdf */; };
 		F8160AE71BF9B9BC0077898B /* 其他行业.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F8160AE51BF9B9BC0077898B /* 其他行业.pdf */; };
 		F8160AE91BF9BC360077898B /* 特别关注介绍.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F8160AE81BF9BC360077898B /* 特别关注介绍.pdf */; };
+		F8160AEC1BF9CB680077898B /* PDFFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160AEB1BF9CB680077898B /* PDFFileManager.swift */; };
 		F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */; };
 		F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E411BF575FB00A8F7A5 /* ViewController.swift */; };
 		F8227E451BF575FB00A8F7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8227E431BF575FB00A8F7A5 /* Main.storyboard */; };
@@ -23,6 +24,8 @@
 		F8227E4D1BF575FB00A8F7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8227E4B1BF575FB00A8F7A5 /* LaunchScreen.storyboard */; };
 		F8227E551BF58FE100A8F7A5 /* ContentProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */; };
 		F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E581BF5945200A8F7A5 /* GroupCell.swift */; };
+		F88D95C91BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D95C71BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift */; };
+		F88D95CA1BFAC7F6000FA050 /* BinaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D95C81BFAC7F6000FA050 /* BinaryEntity.swift */; };
 		F899CDD21BF5BA93006E96B1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD11BF5BA93006E96B1 /* Media.xcassets */; };
 		F899CDD61BF5C218006E96B1 /* 人力资源管理平台.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */; };
 		F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDD91BF5C828006E96B1 /* PDFViewController.swift */; };
@@ -40,6 +43,7 @@
 		F8160AE41BF9B9BC0077898B /* 华信云数据中心服务手册.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "华信云数据中心服务手册.pdf"; sourceTree = "<group>"; };
 		F8160AE51BF9B9BC0077898B /* 其他行业.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "其他行业.pdf"; sourceTree = "<group>"; };
 		F8160AE81BF9BC360077898B /* 特别关注介绍.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "特别关注介绍.pdf"; sourceTree = "<group>"; };
+		F8160AEB1BF9CB680077898B /* PDFFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFFileManager.swift; sourceTree = "<group>"; };
 		F8227E3C1BF575FB00A8F7A5 /* pdfreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pdfreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8227E411BF575FB00A8F7A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 		F8227E4E1BF575FB00A8F7A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProviderViewController.swift; sourceTree = "<group>"; };
 		F8227E581BF5945200A8F7A5 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		F88D95C71BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinaryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F88D95C81BFAC7F6000FA050 /* BinaryEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryEntity.swift; sourceTree = "<group>"; };
 		F899CDD11BF5BA93006E96B1 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "人力资源管理平台.pdf"; sourceTree = "<group>"; };
 		F899CDD91BF5C828006E96B1 /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
@@ -70,14 +76,25 @@
 		F8160AD71BF9A5CE0077898B /* 数据模型 */ = {
 			isa = PBXGroup;
 			children = (
+				F8227E461BF575FB00A8F7A5 /* pdfreader.xcdatamodeld */,
 				F8160AD81BF9A6080077898B /* TreeEntity+CoreDataProperties.swift */,
 				F8160AD91BF9A6080077898B /* TreeEntity.swift */,
 				F8160ADA1BF9A6080077898B /* GroupEntity+CoreDataProperties.swift */,
 				F8160ADB1BF9A6080077898B /* GroupEntity.swift */,
 				F8160ADC1BF9A6080077898B /* FileEntity+CoreDataProperties.swift */,
 				F8160ADD1BF9A6080077898B /* FileEntity.swift */,
+				F88D95C71BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift */,
+				F88D95C81BFAC7F6000FA050 /* BinaryEntity.swift */,
 			);
 			name = "数据模型";
+			sourceTree = "<group>";
+		};
+		F8160AEA1BF9CB030077898B /* 数据管理 */ = {
+			isa = PBXGroup;
+			children = (
+				F8160AEB1BF9CB680077898B /* PDFFileManager.swift */,
+			);
+			name = "数据管理";
 			sourceTree = "<group>";
 		};
 		F8227E331BF575FB00A8F7A5 = {
@@ -100,6 +117,7 @@
 		F8227E3E1BF575FB00A8F7A5 /* pdfreader */ = {
 			isa = PBXGroup;
 			children = (
+				F8160AEA1BF9CB030077898B /* 数据管理 */,
 				F8160AD71BF9A5CE0077898B /* 数据模型 */,
 				F8227E561BF5942200A8F7A5 /* 内容 */,
 				F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */,
@@ -107,7 +125,6 @@
 				F8227E431BF575FB00A8F7A5 /* Main.storyboard */,
 				F8227E4B1BF575FB00A8F7A5 /* LaunchScreen.storyboard */,
 				F8227E4E1BF575FB00A8F7A5 /* Info.plist */,
-				F8227E461BF575FB00A8F7A5 /* pdfreader.xcdatamodeld */,
 				F899CDD11BF5BA93006E96B1 /* Media.xcassets */,
 			);
 			path = pdfreader;
@@ -233,13 +250,16 @@
 				F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */,
 				F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */,
 				F899CDDE1BF5D362006E96B1 /* PDFReaderView.swift in Sources */,
+				F88D95CA1BFAC7F6000FA050 /* BinaryEntity.swift in Sources */,
 				F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */,
+				F8160AEC1BF9CB680077898B /* PDFFileManager.swift in Sources */,
 				F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */,
 				F8160AE21BF9A6080077898B /* FileEntity+CoreDataProperties.swift in Sources */,
 				F8160ADF1BF9A6080077898B /* TreeEntity.swift in Sources */,
 				F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */,
 				F8160AE01BF9A6080077898B /* GroupEntity+CoreDataProperties.swift in Sources */,
 				F8160ADE1BF9A6080077898B /* TreeEntity+CoreDataProperties.swift in Sources */,
+				F88D95C91BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift in Sources */,
 				F8160AE11BF9A6080077898B /* GroupEntity.swift in Sources */,
 				F8227E551BF58FE100A8F7A5 /* ContentProviderViewController.swift in Sources */,
 			);
