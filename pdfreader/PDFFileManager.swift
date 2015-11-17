@@ -119,8 +119,28 @@ class PDFFileManager: NSObject {
 
         self.root = newRoot
 
-        // 检查数据的结果
+        // 检查数据的结果，仅仅打印日志，没有实际逻辑
         checkResult()
+
+
+        saveContext()
+    }
+
+    func saveContext () {
+
+        self.queue .addOperationWithBlock { () -> Void in
+            if self.context.hasChanges {
+                do {
+                    try self.context.save()
+                } catch {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    let nserror = error as NSError
+                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                    abort()
+                }
+            }
+        }
     }
 
     private func checkResult() {
