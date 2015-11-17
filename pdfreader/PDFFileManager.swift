@@ -93,8 +93,6 @@ class PDFFileManager: NSObject {
         newRoot.timeStamp = data["edate"] as? String
         newRoot.refreshTime = NSDate()
 
-        print(data["groups"])
-
         // 创建group数组
         if let groupInfos = data["groups"] as? [[String: AnyObject]] {
             _ = groupInfos.map({ (groupInfo: [String: AnyObject]) -> GroupEntity in
@@ -104,7 +102,6 @@ class PDFFileManager: NSObject {
                 return group
             })
         }
-//        print(newRoot.groups)
 
         // 创建文件数组
         if let fileInfos = data["files"] as? [[String: AnyObject]] {
@@ -120,12 +117,17 @@ class PDFFileManager: NSObject {
             })
         }
 
-        // 检查数据的结果
+        self.root = newRoot
 
-        if let theGroups = newRoot.groups {
+        // 检查数据的结果
+        checkResult()
+    }
+
+    private func checkResult() {
+        if let theGroups = self.root!.groups {
             for group in theGroups {
                 let theGroup = group as! GroupEntity
-//                print("group[\(theGroup.name), \(theGroup.files)]")
+                //                print("group[\(theGroup.name), \(theGroup.files)]")
                 print("group[\(theGroup.name)]")
 
                 if let theFiles = theGroup.files {

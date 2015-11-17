@@ -19,7 +19,6 @@ class TreeEntity: NSManagedObject {
         // 根据group进行检索
         let filtedGroup = self.groups?.filter({ (element) -> Bool in
             let group = element as! GroupEntity
-            print("\(group.groupID)  <---> \(groupID)")
             return group.groupID == groupID
         })
 
