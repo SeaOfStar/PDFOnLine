@@ -29,4 +29,16 @@ class GroupEntity: NSManagedObject {
             return nil
         }
     }
+
+    func configWithDictionary(dataSource: [String: AnyObject]) {
+        self.groupID = dataSource["groupid"] as? String
+
+        self.name = dataSource["groupname"] as? String
+        self.nameInEnglish = dataSource["groupenglishname"] as? String
+
+        self.colorRed = dataSource["modulercolor"] as? Int
+        self.colorGreen = dataSource["modulegcolor"] as? Int
+        self.colorBlue = dataSource["modulebcolor"] as? Int
+        self.colorAlpha = dataSource["moduleacolor"] as? Int
+    }
 }

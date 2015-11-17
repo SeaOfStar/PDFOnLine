@@ -17,6 +17,7 @@ extension FileEntity {
     @NSManaged var fileID: String?
     @NSManaged var name: String?
     @NSManaged var tag: String?
+    @NSManaged var introduce: String?
     @NSManaged var ownerGroup: GroupEntity?
     @NSManaged var data: BinaryEntity?
     @NSManaged var icon: BinaryEntity?

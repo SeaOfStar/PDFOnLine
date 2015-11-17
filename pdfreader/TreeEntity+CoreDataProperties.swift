@@ -14,7 +14,8 @@ import CoreData
 
 extension TreeEntity {
 
-    @NSManaged var updateTime: NSDate?
+    @NSManaged var timeStamp: String?
+    @NSManaged var refreshTime: NSDate?
     @NSManaged var groups: NSOrderedSet?
 
 }

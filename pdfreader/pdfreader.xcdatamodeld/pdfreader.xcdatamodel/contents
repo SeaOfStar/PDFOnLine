@@ -8,6 +8,7 @@
     </entity>
     <entity name="FileEntity" representedClassName=".FileEntity" syncable="YES">
         <attribute name="fileID" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="introduce" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BinaryEntity" inverseName="filesData" inverseEntity="BinaryEntity" syncable="YES"/>
@@ -26,13 +27,14 @@
         <relationship name="root" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TreeEntity" inverseName="groups" inverseEntity="TreeEntity" syncable="YES"/>
     </entity>
     <entity name="TreeEntity" representedClassName=".TreeEntity" syncable="YES">
-        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="refreshTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GroupEntity" inverseName="root" inverseEntity="GroupEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FileEntity" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="FileEntity" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="GroupEntity" positionX="-54" positionY="54" width="128" height="180"/>
-        <element name="TreeEntity" positionX="-36" positionY="63" width="128" height="75"/>
+        <element name="TreeEntity" positionX="-36" positionY="63" width="128" height="90"/>
         <element name="BinaryEntity" positionX="-54" positionY="90" width="128" height="105"/>
     </elements>
 </model>
