@@ -167,11 +167,13 @@ class TreeTask {
                         let iconURLString = info["fileimageurl"] as! String
                         let icon = self.fetchOrCreateBinaryEntityForURL(iconURLString)
                         newFile.icon = icon;
+                        icon.root = root
 
 
                         let dataURLString = info["fileurl"] as! String
                         let data = self.fetchOrCreateBinaryEntityForURL(dataURLString)
                         newFile.data = data
+                        data.root = root
                         
                         return newFile
                     })
@@ -190,6 +192,8 @@ class TreeTask {
             if let url = NSURL(string: bin.remoteURL!) {
                 if let data = NSData(contentsOfURL: url) {
                     bin.data = data
+
+                    print("下载完成：\(bin.remoteURL)")
 
                     do {
                         try self.context.save()

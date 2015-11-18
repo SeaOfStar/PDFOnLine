@@ -18,6 +18,6 @@ extension BinaryEntity {
     @NSManaged var remoteURL: String?
     @NSManaged var filesData: NSSet?
     @NSManaged var filesIcon: NSSet?
-    @NSManaged var roots: NSSet?
+    @NSManaged var root: TreeEntity?
 
 }
