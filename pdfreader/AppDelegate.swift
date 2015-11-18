@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var updateManger :PDFFileManager = PDFFileManager()
 
+    var rootForMainQueue: TreeEntity? {
+        get {
+            if let objID = updateManger.rootID {
+                return self.managedObjectContext.objectWithID(objID) as? TreeEntity
+            }
+            return nil
+        }
+    }
+
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

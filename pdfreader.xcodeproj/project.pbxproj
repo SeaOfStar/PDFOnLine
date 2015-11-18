@@ -26,6 +26,7 @@
 		F8227E591BF5945200A8F7A5 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E581BF5945200A8F7A5 /* GroupCell.swift */; };
 		F88D95C91BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D95C71BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift */; };
 		F88D95CA1BFAC7F6000FA050 /* BinaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D95C81BFAC7F6000FA050 /* BinaryEntity.swift */; };
+		F88D95CD1BFB1BE9000FA050 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D95CC1BFB1BE9000FA050 /* MenuTableViewController.swift */; };
 		F899CDD21BF5BA93006E96B1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD11BF5BA93006E96B1 /* Media.xcassets */; };
 		F899CDD61BF5C218006E96B1 /* 人力资源管理平台.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */; };
 		F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDD91BF5C828006E96B1 /* PDFViewController.swift */; };
@@ -55,6 +56,7 @@
 		F8227E581BF5945200A8F7A5 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		F88D95C71BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinaryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F88D95C81BFAC7F6000FA050 /* BinaryEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryEntity.swift; sourceTree = "<group>"; };
+		F88D95CC1BFB1BE9000FA050 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		F899CDD11BF5BA93006E96B1 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		F899CDD51BF5C218006E96B1 /* 人力资源管理平台.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "人力资源管理平台.pdf"; sourceTree = "<group>"; };
 		F899CDD91BF5C828006E96B1 /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		F8227E3E1BF575FB00A8F7A5 /* pdfreader */ = {
 			isa = PBXGroup;
 			children = (
+				F88D95CB1BFB1BAF000FA050 /* 目录 */,
 				F8160AEA1BF9CB030077898B /* 数据管理 */,
 				F8160AD71BF9A5CE0077898B /* 数据模型 */,
 				F8227E561BF5942200A8F7A5 /* 内容 */,
@@ -146,6 +149,14 @@
 				F8227E581BF5945200A8F7A5 /* GroupCell.swift */,
 			);
 			name = "分组";
+			sourceTree = "<group>";
+		};
+		F88D95CB1BFB1BAF000FA050 /* 目录 */ = {
+			isa = PBXGroup;
+			children = (
+				F88D95CC1BFB1BE9000FA050 /* MenuTableViewController.swift */,
+			);
+			name = "目录";
 			sourceTree = "<group>";
 		};
 		F899CDD31BF5BC6B006E96B1 /* PDf读取 */ = {
@@ -259,6 +270,7 @@
 				F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */,
 				F8160AE01BF9A6080077898B /* GroupEntity+CoreDataProperties.swift in Sources */,
 				F8160ADE1BF9A6080077898B /* TreeEntity+CoreDataProperties.swift in Sources */,
+				F88D95CD1BFB1BE9000FA050 /* MenuTableViewController.swift in Sources */,
 				F88D95C91BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift in Sources */,
 				F8160AE11BF9A6080077898B /* GroupEntity.swift in Sources */,
 				F8227E551BF58FE100A8F7A5 /* ContentProviderViewController.swift in Sources */,

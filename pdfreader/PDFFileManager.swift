@@ -11,7 +11,8 @@ import CoreData
 
 class PDFFileManager: NSObject {
 
-    let serverURL = "http://192.168.144.46:8080/bpm_wechat/bpmclient/getFileInfo.json"
+    static let serverURL = "http://192.168.144.46:8080/bpm_wechat/bpmclient/getFileInfo.json"
+    static let menuUpdatedNotificationKey = "目录数据已经更新"
 
     lazy var queue: NSOperationQueue = NSOperationQueue()
 
@@ -36,16 +37,18 @@ class PDFFileManager: NSObject {
 
     var root: TreeEntity? {
         didSet {
-            self.lastUpdateTime = root?.timeStamp
+            lastUpdateTime = root?.timeStamp
+            rootID = root?.objectID
         }
     }
 
     var lastUpdateTime: String?
+    var rootID: NSManagedObjectID?
 
     private func doCheckUpdate() {
         // 检查是否有新数据
 
-        let url = NSURL(string: serverURL)
+        let url = NSURL(string: PDFFileManager.serverURL)
 
         if let jsonData = NSData(contentsOfURL: url!) {
 
@@ -122,16 +125,19 @@ class PDFFileManager: NSObject {
         // 检查数据的结果，仅仅打印日志，没有实际逻辑
         checkResult()
 
-
         saveContext()
     }
 
     func saveContext () {
 
-        self.queue .addOperationWithBlock { () -> Void in
+        queue.addOperationWithBlock { () -> Void in
             if self.context.hasChanges {
                 do {
                     try self.context.save()
+
+                    // 发送全局通知，通知数据已经更新
+                    NSNotificationCenter.defaultCenter().postNotificationName(PDFFileManager.menuUpdatedNotificationKey, object: self)
+
                 } catch {
                     // Replace this implementation with code to handle the error appropriately.
                     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
