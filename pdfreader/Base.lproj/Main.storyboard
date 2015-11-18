@@ -385,6 +385,9 @@
                             <constraint firstItem="1fc-ja-KeA" firstAttribute="leading" secondItem="rAq-b4-dTA" secondAttribute="leading" id="nWX-F1-xeb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tagView" destination="veu-es-sxe" id="4GH-xo-Ngg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FvY-7J-XyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

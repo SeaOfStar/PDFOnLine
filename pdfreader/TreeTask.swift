@@ -9,13 +9,19 @@
 import UIKit
 import CoreData
 
+protocol TreeTaskDelegate : NSObjectProtocol {
+    func taskDidFinishedCache(task: TreeTask)
+}
+
 class TreeTask {
 
     static let defaultString = "http://192.168.144.45:8080/bpm_wechat/bpmclient/getFileInfo.json"
 
     let serverURL: NSURL = NSURL(string: TreeTask.defaultString)!
 
-    static let menuUpdatedNotificationKey = "目录数据已经更新"
+    weak var delegate: TreeTaskDelegate?
+
+
 
     init() {
         queue = NSOperationQueue()
@@ -90,8 +96,10 @@ class TreeTask {
     private var reportOperation: NSBlockOperation {
         return NSBlockOperation(block: { () -> Void in
             print("缓冲完成")
-            // 发送全局通知，通知数据已经更新
-            NSNotificationCenter.defaultCenter().postNotificationName(TreeTask.menuUpdatedNotificationKey, object: self)
+
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.delegate?.taskDidFinishedCache(self)
+            })
         })
     }
 

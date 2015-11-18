@@ -11,13 +11,16 @@ import CoreData
 
 class MenuTableViewController: UITableViewController {
 
-    var root: TreeEntity?
+    var root: TreeEntity? {
+        return appDelegate.root
+    }
+
+    var appDelegate: AppDelegate {
+        return UIApplication.sharedApplication().delegate as! AppDelegate
+    }
 
     var managedContext: NSManagedObjectContext {
-        get {
-            let app = UIApplication.sharedApplication().delegate as! AppDelegate
-            return app.managedObjectContext
-        }
+        return appDelegate.managedObjectContext
     }
 
     override func viewDidLoad() {
@@ -35,32 +38,12 @@ class MenuTableViewController: UITableViewController {
 
 
         // 注册全局通知监听menu的更新
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: TreeTask.menuUpdatedNotificationKey, object: nil)
-    }
-
-    func refreshRoot() {
-        // 做检索，检索出最新的数据
-        let request = NSFetchRequest(entityName: "TreeEntity")
-        request.predicate = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "refreshTime", ascending: false)
-        request.sortDescriptors = [sort]
-
-        do {
-            let trees = try managedContext.executeFetchRequest(request)
-            self.root = trees.first as? TreeEntity
-        } catch {
-            self.root = nil
-        }
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
     }
 
     func reloadData() {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            // 重新检索root数据
-            self.refreshRoot()
-
             self.checkResult()
-
             self.tableView.reloadData()
         }
     }
