@@ -14,22 +14,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    lazy var updateManger :PDFFileManager = PDFFileManager()
+//    lazy var updateManger :PDFFileManager = PDFFileManager()
 
-    var rootForMainQueue: TreeEntity? {
-        get {
-            if let objID = updateManger.rootID {
-                return self.managedObjectContext.objectWithID(objID) as? TreeEntity
-            }
-            return nil
-        }
-    }
+//    var rootForMainQueue: TreeEntity? {
+//        get {
+//            if let objID = updateManger.rootID {
+//                return self.managedObjectContext.objectWithID(objID) as? TreeEntity
+//            }
+//            return nil
+//        }
+//    }
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        updateManger.checkUpdate()
+        TreeTask().fetch()
+
         return true
     }
 

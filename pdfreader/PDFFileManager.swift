@@ -16,6 +16,9 @@ class PDFFileManager: NSObject {
 
     lazy var queue: NSOperationQueue = NSOperationQueue()
 
+    var cacheFinishTime: NSDate?
+    var statusString: String?
+
     lazy var context: NSManagedObjectContext = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
 
@@ -69,8 +72,6 @@ class PDFFileManager: NSObject {
     }
 
     private func checkNewData(data: [String:AnyObject]) {
-
-
         if let last = lastUpdateTime {
             if let time = data["edate"] {
                 if time as! String == last {
@@ -115,6 +116,16 @@ class PDFFileManager: NSObject {
                 let groupID = info["filemoduleid"] as! String
 
                 newFile.ownerGroup = newRoot.groupWithID(groupID)
+
+                // 建立缓冲的二进制数据
+                let iconURLString = info["fileimageurl"] as! String
+                let icon = fetchOrCreateBinaryEntityForURL(iconURLString)
+                newFile.icon = icon;
+
+
+                let dataURLString = info["fileurl"] as! String
+                let data = fetchOrCreateBinaryEntityForURL(dataURLString)
+                newFile.data = data
 
                 return newFile
             })
@@ -164,6 +175,61 @@ class PDFFileManager: NSObject {
                 }
             }
         }
+    }
+
+    // MARK: - 关于文件缓冲的操作
+    private func binaryForURL(urlString: String) ->BinaryEntity? {
+        let request = NSFetchRequest(entityName: "BinaryEntity")
+        request.predicate = NSPredicate(format: "remoteURL = \(urlString)")
+        request.sortDescriptors = [NSSortDescriptor(key: "remoteURL", ascending: false)]
+
+        do {
+            let result = try context.executeFetchRequest(request)
+            return result.first as? BinaryEntity
+        } catch {
+            return nil
+        }
+    }
+
+    private func fetchOrCreateBinaryEntityForURL(urlString: String) -> BinaryEntity! {
+        if let old = binaryForURL(urlString) {
+            return old
+        }
+        else {
+            let newBin = NSEntityDescription.insertNewObjectForEntityForName("BinaryEntity", inManagedObjectContext: context) as! BinaryEntity
+            newBin.remoteURL = urlString
+            return newBin
+        }
+    }
+
+    // 最终回报结果的Opreation
+    private func reportOperation() -> NSOperation {
+        return NSBlockOperation(block: { () -> Void in
+            self.cacheFinishTime = NSDate()
+            // 发出通知
+            self.statusString = "所有数据缓冲完毕"
+        })
+    }
+
+    private func cacheOperationForEntity(entity: BinaryEntity) ->NSOperation {
+        return NSBlockOperation(block: { () -> Void in
+            if let _ = entity.data {
+                // 已经存在缓冲数据
+                return
+            }
+
+            if let url = NSURL(string: entity.remoteURL!) {
+                if let data = NSData(contentsOfURL: url) {
+                    entity.data = data
+
+                    do {
+                        try self.context.save()
+                    } catch {
+                        NSLog("保存数据出错")
+                    }
+                }
+            }
+        })
     }
 }
 

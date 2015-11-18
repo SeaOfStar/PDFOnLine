@@ -32,6 +32,7 @@
 		F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDD91BF5C828006E96B1 /* PDFViewController.swift */; };
 		F899CDDC1BF5D25C006E96B1 /* PDFPageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */; };
 		F899CDDE1BF5D362006E96B1 /* PDFReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */; };
+		F8D1C5361BFC225800D4C3D5 /* TreeTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1C5351BFC225800D4C3D5 /* TreeTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		F899CDD91BF5C828006E96B1 /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageLayer.swift; sourceTree = "<group>"; };
 		F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFReaderView.swift; sourceTree = "<group>"; };
+		F8D1C5351BFC225800D4C3D5 /* TreeTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				F8160AEB1BF9CB680077898B /* PDFFileManager.swift */,
+				F8D1C5351BFC225800D4C3D5 /* TreeTask.swift */,
 			);
 			name = "数据管理";
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				F88D95CA1BFAC7F6000FA050 /* BinaryEntity.swift in Sources */,
 				F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */,
 				F8160AEC1BF9CB680077898B /* PDFFileManager.swift in Sources */,
+				F8D1C5361BFC225800D4C3D5 /* TreeTask.swift in Sources */,
 				F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */,
 				F8160AE21BF9A6080077898B /* FileEntity+CoreDataProperties.swift in Sources */,
 				F8160ADF1BF9A6080077898B /* TreeEntity.swift in Sources */,

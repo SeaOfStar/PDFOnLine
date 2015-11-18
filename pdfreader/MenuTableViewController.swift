@@ -31,9 +31,11 @@ class MenuTableViewController: UITableViewController {
 
         reloadData()
 
+        tableView.tableFooterView = UIView()
+
 
         // 注册全局通知监听menu的更新
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: PDFFileManager.menuUpdatedNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: TreeTask.menuUpdatedNotificationKey, object: nil)
     }
 
     func refreshRoot() {
@@ -121,7 +123,6 @@ class MenuTableViewController: UITableViewController {
         imageView.layer.cornerRadius = 5.0
 
         return sectionHeader
-
     }
 
 
@@ -131,11 +132,18 @@ class MenuTableViewController: UITableViewController {
         // Configure the cell...
 
         if let file = fileForIndexPath(indexPath) {
-            cell.textLabel?.text = "\(file.name) · \(file.tag)"
+            if let name = file.name {
+                if let tag = file.tag {
+                    cell.textLabel?.text = "\(name) · \(tag)"
+                }
+                else {
+                    cell.textLabel?.text = "\(name)"
+                }
+                return cell
+            }
         }
-        else {
-            cell.textLabel?.text = ""
-        }
+
+        cell.textLabel?.text = ""
 
         return cell
     }
@@ -160,7 +168,7 @@ class MenuTableViewController: UITableViewController {
 
         print("checkResult")
 
-        if let theGroups = self.root!.groups {
+        if let theGroups = self.root?.groups {
             for group in theGroups {
                 let theGroup = group as! GroupEntity
                 //                print("group[\(theGroup.name), \(theGroup.files)]")

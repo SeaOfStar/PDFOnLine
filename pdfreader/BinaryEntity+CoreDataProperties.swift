@@ -2,7 +2,7 @@
 //  BinaryEntity+CoreDataProperties.swift
 //  pdfreader
 //
-//  Created by 吴向东 on 15/11/17.
+//  Created by 吴向东 on 15/11/18.
 //  Copyright © 2015年 MIBD. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,9 +14,10 @@ import CoreData
 
 extension BinaryEntity {
 
-    @NSManaged var remoteURL: String?
     @NSManaged var data: NSData?
+    @NSManaged var remoteURL: String?
     @NSManaged var filesData: NSSet?
     @NSManaged var filesIcon: NSSet?
+    @NSManaged var roots: NSSet?
 
 }

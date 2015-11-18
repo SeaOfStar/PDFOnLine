@@ -19,15 +19,6 @@ class FileEntity: NSManagedObject {
         self.name = dataSource["filename"] as? String
         self.introduce = dataSource["filemessage"] as? String
         self.tag = dataSource["filetag"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
-        self.fileID = dataSource["filename"] as? String
     }
 
 }
