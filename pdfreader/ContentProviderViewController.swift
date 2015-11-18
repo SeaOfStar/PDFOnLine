@@ -70,11 +70,6 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
             cell.EnglishTitle.text = ""
             cell.topColorLine.backgroundColor = UIColor.grayColor()
         }
-
-
-
-
-
         return cell
     }
 
