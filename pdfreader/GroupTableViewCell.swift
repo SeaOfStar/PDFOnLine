@@ -10,8 +10,8 @@ import UIKit
 
 class GroupTableViewCell: UITableViewCell {
 
-    let defaultIcon = UIImage(named: "注册商标_淡化")
-    let defaultBackgroundColor = UIColor.grayColor()
+    static let defaultIcon = UIImage(named: "注册商标_淡化")
+    static let defaultBackgroundColor = UIColor.grayColor()
 
     @IBOutlet weak var topLine: UIView!
 
@@ -46,15 +46,15 @@ class GroupTableViewCell: UITableViewCell {
             arrowBackground.backgroundColor = color
         }
         else {
-            topLine.backgroundColor = defaultBackgroundColor
-            arrowBackground.backgroundColor = defaultBackgroundColor
+            topLine.backgroundColor = GroupTableViewCell.defaultBackgroundColor
+            arrowBackground.backgroundColor = GroupTableViewCell.defaultBackgroundColor
         }
 
         if let bin = data.icon?.data {
             iconView.image = UIImage(data: bin)
         }
         else {
-            iconView.image = defaultIcon;
+            iconView.image = GroupTableViewCell.defaultIcon;
         }
 
         tagLabel.text = data.tag

@@ -38,7 +38,7 @@ class GroupListViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = group?.files?.count {
-            return count
+            return max(count - 1, 0)
         }
         return 0
     }
@@ -46,12 +46,11 @@ class GroupListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MIBDMessageCell", forIndexPath: indexPath) as! GroupTableViewCell
 
-        let data = group?.files![indexPath.row] as! FileEntity
+        let data = group?.files![indexPath.row + 1] as! FileEntity
 
         cell.configWithFileEntity(data)
 
         return cell
-
     }
 
     /*

@@ -494,7 +494,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2013年7月24日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z8-UP-hZF">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2013年7月24日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z8-UP-hZF">
                                         <rect key="frame" x="489" y="55" width="99" height="43"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -557,6 +557,10 @@
                             <constraint firstItem="Heu-IV-7Ks" firstAttribute="leading" secondItem="pUi-tY-Xp9" secondAttribute="leading" constant="12" id="zge-1K-VVZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="firstIcon" destination="Heu-IV-7Ks" id="6dX-Ax-jue"/>
+                        <outlet property="firstPDFTitle" destination="Tfv-3w-EWG" id="acd-e0-O6Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FTc-nY-IXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,6 +12,11 @@ class GroupFrameworkViewController: UIViewController {
 
     var listController: GroupListViewController?
 
+    static let defaultIcon = UIImage(named: "注册商标_淡化")
+
+    @IBOutlet weak var firstIcon: UIImageView!
+    @IBOutlet weak var firstPDFTitle: UILabel!
+
     var group: GroupEntity? {
         didSet {
             if let list = listController {
@@ -34,6 +39,17 @@ class GroupFrameworkViewController: UIViewController {
 
     func reloadData() {
 
+        firstIcon.image = GroupFrameworkViewController.defaultIcon
+        firstPDFTitle.text = ""
+
+        if let firstPDF = group?.files?.firstObject {
+            let pdf = firstPDF as! FileEntity
+            firstPDFTitle.text = pdf.name
+
+            if let imageData = pdf.icon?.data {
+                firstIcon.image = UIImage(data: imageData)
+            }
+        }
     }
     
 
