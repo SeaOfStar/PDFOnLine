@@ -38,7 +38,9 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.indexPath = NSIndexPath(forRow: -1, inSection: 2)
+        if let _ = self.root {
+            self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
+        }
 
         // 注册全局通知，监听数据更新操作
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
