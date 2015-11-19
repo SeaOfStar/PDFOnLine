@@ -12,16 +12,33 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
     @IBOutlet weak var PDFReader: PDFReaderView!
 
+    @IBOutlet weak var lineView: UIView!
+
+    @IBOutlet weak var titleLabel: UILabel!
+
+    var pdf: FileEntity? {
+        didSet {
+
+            if let theData = pdf {
+                titleLabel.text = theData.name
+                lineView.backgroundColor = UIColor.grayColor()
+                lineView.backgroundColor = theData.ownerGroup?.color
+
+                if let data = theData.data?.data {
+                    PDFReader.data = data
+                }
+            }
+
+
+        }
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
-        let path = NSBundle.mainBundle().pathForResource("人力资源管理平台", ofType: "pdf")
-        let url = NSURL(fileURLWithPath: path!)
-
-        self.PDFReader.url = url
-        self.PDFReader.delegate = self
+        PDFReader.delegate = self
     }
 
     override func didReceiveMemoryWarning() {

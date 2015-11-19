@@ -386,6 +386,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="groupContainer" destination="1fc-ja-KeA" id="Qgx-3g-igO"/>
+                        <outlet property="pdfContainer" destination="GHx-Qm-yY6" id="BsG-eQ-XMt"/>
                         <outlet property="tagView" destination="veu-es-sxe" id="4GH-xo-Ngg"/>
                     </connections>
                 </viewController>
@@ -408,7 +410,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziV-rA-KZK" userLabel="top view">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Poe-rz-VOe">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Poe-rz-VOe" userLabel="line">
                                         <rect key="frame" x="0.0" y="50" width="600" height="4"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -455,6 +457,8 @@
                     </view>
                     <connections>
                         <outlet property="PDFReader" destination="H6I-Ix-Ufb" id="VLJ-SI-AD0"/>
+                        <outlet property="lineView" destination="Poe-rz-VOe" id="DdP-Lr-yjQ"/>
+                        <outlet property="titleLabel" destination="JMX-CM-t1d" id="TLw-mf-430"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLZ-LV-haw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -531,6 +535,14 @@
                                 <rect key="frame" x="12" y="110" width="193" height="383"/>
                                 <animations/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-aO-aWC">
+                                <rect key="frame" x="12" y="110" width="193" height="383"/>
+                                <animations/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="fistPDFIconAction:" destination="nSO-Wu-Sfd" eventType="touchUpInside" id="b0c-Yb-4HZ"/>
+                                </connections>
+                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ff8-EI-bgm">
                                 <rect key="frame" x="217" y="110" width="375" height="383"/>
                                 <animations/>
@@ -548,11 +560,15 @@
                             <constraint firstItem="SdT-DB-37L" firstAttribute="leading" secondItem="pUi-tY-Xp9" secondAttribute="leading" id="4B1-ar-Qu6"/>
                             <constraint firstItem="Heu-IV-7Ks" firstAttribute="top" secondItem="SdT-DB-37L" secondAttribute="bottom" constant="12" id="5qF-pJ-pMH"/>
                             <constraint firstItem="ff8-EI-bgm" firstAttribute="top" secondItem="SdT-DB-37L" secondAttribute="bottom" constant="12" id="7YL-pB-V4R"/>
+                            <constraint firstItem="Wjc-aO-aWC" firstAttribute="top" secondItem="Heu-IV-7Ks" secondAttribute="top" id="GNV-iy-ChJ"/>
                             <constraint firstItem="SdT-DB-37L" firstAttribute="top" secondItem="pUi-tY-Xp9" secondAttribute="top" id="He3-MM-eQk"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ff8-EI-bgm" secondAttribute="bottom" constant="12" id="Pbo-hH-1Mg"/>
                             <constraint firstAttribute="bottom" secondItem="Heu-IV-7Ks" secondAttribute="bottom" constant="12" id="fQW-2H-WME"/>
                             <constraint firstAttribute="trailing" secondItem="SdT-DB-37L" secondAttribute="trailing" id="nyT-P1-Fmg"/>
                             <constraint firstItem="ff8-EI-bgm" firstAttribute="leading" secondItem="Heu-IV-7Ks" secondAttribute="trailing" constant="12" id="oKj-Kn-wko"/>
+                            <constraint firstItem="Wjc-aO-aWC" firstAttribute="leading" secondItem="Heu-IV-7Ks" secondAttribute="leading" id="ogX-69-HzS"/>
+                            <constraint firstItem="Wjc-aO-aWC" firstAttribute="trailing" secondItem="Heu-IV-7Ks" secondAttribute="trailing" id="re9-xf-9Lw"/>
+                            <constraint firstItem="Wjc-aO-aWC" firstAttribute="bottom" secondItem="Heu-IV-7Ks" secondAttribute="bottom" id="reX-nA-HvS"/>
                             <constraint firstItem="ff8-EI-bgm" firstAttribute="trailing" secondItem="pUi-tY-Xp9" secondAttribute="trailingMargin" constant="12" id="sPf-96-DRa"/>
                             <constraint firstItem="Heu-IV-7Ks" firstAttribute="leading" secondItem="pUi-tY-Xp9" secondAttribute="leading" constant="12" id="zge-1K-VVZ"/>
                         </constraints>

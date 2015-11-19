@@ -8,10 +8,15 @@
 
 import UIKit
 
-class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GroupFrameworkViewControllerDelegate {
 
     var groupDetailController: GroupFrameworkViewController!
     var pdfViewController: PDFViewController!
+
+    // 承载group内容和PDF内容的两个container view
+    @IBOutlet weak var pdfContainer: UIView!
+    @IBOutlet weak var groupContainer: UIView!
+
 
 
     var app: AppDelegate {
@@ -31,7 +36,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.indexPath = NSIndexPath(forRow: 0, inSection: 2)
+        self.indexPath = NSIndexPath(forRow: -1, inSection: 2)
 
         // 注册全局通知，监听数据更新操作
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
@@ -47,10 +52,41 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     func reloadData() {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             self.tagView.reloadData()
-            if let section = self.indexPath?.section {
-                self.groupDetailController.group = self.root?.groups?.objectAtIndex(section) as? GroupEntity
+
+            if let theIndexPath = self.indexPath {
+                let theGroup = self.root?.groups?.objectAtIndex(theIndexPath.section) as? GroupEntity
+                self.groupDetailController.group = theGroup
+
+                // 判断是否显示内容的依据是row是否合法
+                // row 小于0则显示group信息，反之则显示对应的PDF
+                let row = theIndexPath.row
+                if row < 0 {
+                    // 显示group
+
+                }
+                else {
+                    // 显示具体的PDF的内容
+                    if let pdf = theGroup?.files?.objectAtIndex(row) as? FileEntity {
+                        self.doShowPDF(pdf)
+                    }
+                }
             }
         }
+    }
+
+    func doShowPDF(file: FileEntity) {
+        bringPDFViewToTop()
+        hideTagView()
+
+        pdfViewController.pdf = file
+    }
+
+    func bringPDFViewToTop() {
+        view.bringSubviewToFront(pdfContainer)
+    }
+
+    func hideTagView() {
+
     }
 
 
@@ -65,6 +101,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         switch segue.identifier! {
         case "显示分组":
             self.groupDetailController = segue.destinationViewController as! GroupFrameworkViewController
+            self.groupDetailController.delegate = self
 
         case "显示PDF":
             self.pdfViewController = segue.destinationViewController as! PDFViewController
@@ -120,6 +157,18 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.indexPath = NSIndexPath(forRow: -1, inSection: indexPath.row)
+    }
+
+//    MARK: - 用户在分组的详细页面上点击了对应的数据
+    func groupController(groupController: GroupFrameworkViewController, didSelectedCellAtIndex index: Int) {
+        // 找到group相对应的section
+
+        if let theGroup = groupController.group {
+            if let section = root?.groups?.indexOfObject(theGroup) {
+                let indexPath = NSIndexPath(forRow: index, inSection: section)
+                self.indexPath = indexPath
+            }
+        }
     }
 
 }

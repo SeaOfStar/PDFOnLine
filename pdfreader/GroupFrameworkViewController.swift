@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol GroupFrameworkViewControllerDelegate: NSObjectProtocol {
+    // 用户点击了group中的数据
+    func groupController(groupController: GroupFrameworkViewController, didSelectedCellAtIndex index:Int)
+}
+
 class GroupFrameworkViewController: UIViewController {
 
     var listController: GroupListViewController?
 
     static let defaultIcon = UIImage(named: "注册商标_淡化")
+
+    weak var delegate: GroupFrameworkViewControllerDelegate?
 
     @IBOutlet weak var firstIcon: UIImageView!
     @IBOutlet weak var firstPDFTitle: UILabel!
@@ -64,5 +71,8 @@ class GroupFrameworkViewController: UIViewController {
         }
     }
 
+    @IBAction func fistPDFIconAction(sender: UIButton) {
+        self.delegate?.groupController(self, didSelectedCellAtIndex: 0)
+    }
 
 }
