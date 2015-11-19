@@ -63,7 +63,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
                 let row = theIndexPath.row
                 if row < 0 {
                     // 显示group
-
+                    self.bringGroupViewUp()
                 }
                 else {
                     // 显示具体的PDF的内容
@@ -87,7 +87,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     }
 
     func bringGroupViewUp() {
-        view.sendSubviewToBack(groupContainer)
+        view.sendSubviewToBack(pdfContainer)
     }
 
     func hideTagView(hide: Bool) {
@@ -172,8 +172,6 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
 //    MARK: - 用户在分组的详细页面上点击了对应的数据
     func groupController(groupController: GroupFrameworkViewController, didSelectedCellAtIndex index: Int) {
-        // 找到group相对应的section
-
         if let theGroup = groupController.group {
             if let section = root?.groups?.indexOfObject(theGroup) {
                 let indexPath = NSIndexPath(forRow: index, inSection: section)
