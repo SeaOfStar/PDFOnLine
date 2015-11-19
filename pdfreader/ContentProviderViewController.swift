@@ -10,8 +10,24 @@ import UIKit
 
 class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    var app: AppDelegate {
+        return UIApplication.sharedApplication().delegate as! AppDelegate
+    }
+
+    var root: TreeEntity? {
+        return app.root
+    }
+
+    var indexPath: NSIndexPath? {
+        didSet {
+            reloadData()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.indexPath = NSIndexPath(forRow: 0, inSection: 2)
 
         // 注册全局通知，监听数据更新操作
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
@@ -23,11 +39,6 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     }
 
     @IBOutlet weak var tagView: UICollectionView!
-
-    private var root: TreeEntity? {
-        let app = UIApplication.sharedApplication().delegate as! AppDelegate
-        return app.root
-    }
 
     func reloadData() {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
@@ -57,20 +68,34 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView .dequeueReusableCellWithReuseIdentifier("分组cell", forIndexPath: indexPath) as! GroupCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("分组cell", forIndexPath: indexPath) as! GroupCell
 
         if let group = self.root?.groups?[indexPath.row] {
             let theGroup = group as! GroupEntity
             cell.ChineseTitle.text = theGroup.name
             cell.EnglishTitle.text = theGroup.nameInEnglish
-            cell.topColorLine.backgroundColor = theGroup.color
+
+            let color = theGroup.color
+            cell.topColorLine.backgroundColor = color
+
+            // 选中状态
+            if let selection = self.indexPath {
+//                print("\(indexPath.row) == \(selection.section)")
+                cell.userSelected = (indexPath.row == selection.section)
+            }
         }
         else {
             cell.ChineseTitle.text = ""
             cell.EnglishTitle.text = ""
             cell.topColorLine.backgroundColor = UIColor.grayColor()
+            cell.userSelected = false
         }
+
         return cell
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.indexPath = NSIndexPath(forRow: 0, inSection: indexPath.row)
     }
 
 }

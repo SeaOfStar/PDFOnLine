@@ -14,4 +14,10 @@ class GroupCell: UICollectionViewCell {
     @IBOutlet weak var EnglishTitle: UILabel!
     @IBOutlet weak var ChineseTitle: UILabel!
 
+    var userSelected: Bool = false {
+        didSet {
+            self.backgroundColor = userSelected ? self.topColorLine.backgroundColor : UIColor.clearColor()
+        }
+    }
+
 }

@@ -276,18 +276,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fc-ja-KeA" userLabel="组view">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
-                                <animations/>
-                                <connections>
-                                    <segue destination="nSO-Wu-Sfd" kind="embed" id="5Sw-9k-e3y"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHx-Qm-yY6" userLabel="文件View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                                 <animations/>
                                 <connections>
                                     <segue destination="bYw-pe-vA5" kind="embed" id="bF7-CN-Ncw"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fc-ja-KeA" userLabel="组view">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="nSO-Wu-Sfd" kind="embed" id="5Sw-9k-e3y"/>
                                 </connections>
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="veu-es-sxe">
