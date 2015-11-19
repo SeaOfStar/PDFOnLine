@@ -13,9 +13,9 @@ protocol GroupFrameworkViewControllerDelegate: NSObjectProtocol {
     func groupController(groupController: GroupFrameworkViewController, didSelectedCellAtIndex index:Int)
 }
 
-class GroupFrameworkViewController: UIViewController {
+class GroupFrameworkViewController: UIViewController, GroupListViewControllerDelegate {
 
-    var listController: GroupListViewController?
+    var listController: GroupListViewController!
 
     static let defaultIcon = UIImage(named: "注册商标_淡化")
 
@@ -68,11 +68,16 @@ class GroupFrameworkViewController: UIViewController {
 
         if segue.identifier == "分组列表" {
             self.listController = segue.destinationViewController as? GroupListViewController
+            self.listController.delegate = self
         }
     }
 
     @IBAction func fistPDFIconAction(sender: UIButton) {
         self.delegate?.groupController(self, didSelectedCellAtIndex: 0)
+    }
+
+    func listController(groupListController: GroupListViewController, didClickAtIndex index: Int) {
+        self.delegate?.groupController(self, didSelectedCellAtIndex: (index + 1))
     }
 
 }

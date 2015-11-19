@@ -92,7 +92,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
     func hideTagView(hide: Bool) {
 
-        UIView.animateWithDuration(0.7) { () -> Void in
+        UIView.animateWithDuration(0.4) { () -> Void in
             self.tagViewUpperDistance.constant = hide ? (-self.tagView.bounds.size.height) : 0.0
             self.tagView.layoutIfNeeded()
         }

@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol GroupListViewControllerDelegate: NSObjectProtocol {
+    func listController(groupListController: GroupListViewController, didClickAtIndex index:Int)
+}
+
 class GroupListViewController: UITableViewController {
+
+    weak var delegate: GroupListViewControllerDelegate?
 
     var group: GroupEntity? {
         didSet {
@@ -51,6 +57,10 @@ class GroupListViewController: UITableViewController {
         cell.configWithFileEntity(data)
 
         return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.delegate?.listController(self, didClickAtIndex: indexPath.row)
     }
 
     /*
