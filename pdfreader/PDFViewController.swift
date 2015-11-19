@@ -18,7 +18,6 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
     var pdf: FileEntity? {
         didSet {
-
             if let theData = pdf {
                 titleLabel.text = theData.name
                 lineView.backgroundColor = UIColor.grayColor()
@@ -28,8 +27,6 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
                     PDFReader.data = data
                 }
             }
-
-
         }
     }
 
@@ -48,15 +45,15 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
 
     func didReachEndOfPDFView(view: PDFReaderView) {
-        let path = NSBundle.mainBundle().pathForResource("华信云数据中心服务手册", ofType: "pdf")
-        let url = NSURL(fileURLWithPath: path!)
-        view.url = url
+        if let next = pdf?.nextFile {
+            pdf = next
+        }
     }
 
     func didReachTopOfPDFView(view: PDFReaderView) {
-        let path = NSBundle.mainBundle().pathForResource("特别关注介绍", ofType: "pdf")
-        let url = NSURL(fileURLWithPath: path!)
-        view.url = url
+        if let last = pdf?.lastFile {
+            pdf = last
+        }
     }
 
     /*

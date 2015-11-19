@@ -21,4 +21,44 @@ class FileEntity: NSManagedObject {
         self.tag = dataSource["filetag"] as? String
     }
 
+    private var sortedAllFiles: [FileEntity] {
+        let root = self.ownerGroup!.root!
+
+        // 最暴力也是最简单的方法，所有人出来排队啦~~~
+        var allFiles: [FileEntity] = []
+
+        for group in root.groups! {
+            let theGroup = group as! GroupEntity
+
+            if let files = theGroup.files {
+                let theFiles = files.array as! [FileEntity]
+                allFiles.appendContentsOf(theFiles)
+            }
+        }
+
+        return allFiles
+    }
+
+    var nextFile: FileEntity? {
+
+        let all = sortedAllFiles
+
+        let index = all.indexOf(self)!
+        if index < (all.count - 1) {
+            return all[index + 1]
+        }
+
+        return nil
+    }
+
+    var lastFile: FileEntity? {
+        let all = sortedAllFiles
+
+        let index = all.indexOf(self)!
+        if index > 0 {
+            return all[index - 1]
+        }
+        return nil
+    }
+
 }
