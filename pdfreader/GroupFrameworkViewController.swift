@@ -23,6 +23,7 @@ class GroupFrameworkViewController: UIViewController, GroupListViewControllerDel
 
     @IBOutlet weak var firstIcon: UIImageView!
     @IBOutlet weak var firstPDFTitle: UILabel!
+    @IBOutlet weak var colorView: UIView!
 
     var group: GroupEntity? {
         didSet {
@@ -48,6 +49,8 @@ class GroupFrameworkViewController: UIViewController, GroupListViewControllerDel
 
         firstIcon.image = GroupFrameworkViewController.defaultIcon
         firstPDFTitle.text = ""
+
+        colorView.backgroundColor = group?.color
 
         if let firstPDF = group?.files?.firstObject {
             let pdf = firstPDF as! FileEntity

@@ -539,7 +539,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-aO-aWC">
                                 <rect key="frame" x="12" y="110" width="193" height="383"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="fistPDFIconAction:" destination="nSO-Wu-Sfd" eventType="touchUpInside" id="b0c-Yb-4HZ"/>
                                 </connections>
@@ -575,6 +574,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="colorView" destination="625-MS-BGJ" id="09X-Br-bmU"/>
                         <outlet property="firstIcon" destination="Heu-IV-7Ks" id="6dX-Ax-jue"/>
                         <outlet property="firstPDFTitle" destination="Tfv-3w-EWG" id="acd-e0-O6Q"/>
                     </connections>
