@@ -11,6 +11,11 @@ import CoreData
 
 class MenuTableViewController: UITableViewController {
 
+    static let notificationKeyForPDF = "用户在menu上点击cell"
+    static let notificationKeyForIndexPath = "indexPathKey"
+
+    static let buttonTagBase = 456
+
     var root: TreeEntity? {
         return appDelegate.root
     }
@@ -86,20 +91,23 @@ class MenuTableViewController: UITableViewController {
         line.backgroundColor = theGroup.color
 
         let label = UILabel(frame: CGRect(x: 10.0, y: 0.0, width: width, height: 60.0))
+        label.text = theGroup.name
+        label.backgroundColor = UIColor.clearColor()
+        label.font = label.font.fontWithSize(20.0)
 
         let image = UIImage(named: "arrow")
         let imageView = UIImageView(image: image)
         imageView.frame = CGRect(x: 346.0, y: 13.0, width: 35.0, height: 35.0)
 
+        // 点击的按钮
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: width, height: sectionHeader.bounds.size.height))
+        button.addTarget(self, action: Selector("headerClickAction:"), forControlEvents: .TouchUpInside)
+        button.tag = MenuTableViewController.buttonTagBase + section
 
         sectionHeader.addSubview(line)
         sectionHeader.addSubview(label)
         sectionHeader.addSubview(imageView)
-
-        label.text = theGroup.name
-        label.backgroundColor = UIColor.clearColor()
-        label.font = label.font.fontWithSize(20.0)
-
+        sectionHeader.addSubview(button)
 
         imageView.contentMode = .Center
         imageView.backgroundColor = theGroup.color
@@ -129,6 +137,16 @@ class MenuTableViewController: UITableViewController {
         cell.textLabel?.text = ""
 
         return cell
+    }
+
+    func headerClickAction(button: UIButton) {
+        let indexPath = NSIndexPath(forRow: -1, inSection: (button.tag - MenuTableViewController.buttonTagBase))
+        NSNotificationCenter.defaultCenter().postNotificationName(MenuTableViewController.notificationKeyForPDF, object: self, userInfo:[MenuTableViewController.notificationKeyForIndexPath: indexPath] )
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // 发布全局通知
+        NSNotificationCenter.defaultCenter().postNotificationName(MenuTableViewController.notificationKeyForPDF, object: self, userInfo:[MenuTableViewController.notificationKeyForIndexPath: indexPath] )
     }
 
     func groupForSection(section: Int) ->GroupEntity? {

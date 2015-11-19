@@ -42,6 +42,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        // 收到任何菜单传来的通知都隐藏菜单
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("closeMenuButtonAction:"), name: MenuTableViewController.notificationKeyForPDF, object: nil)
     }
 
     override func didReceiveMemoryWarning() {

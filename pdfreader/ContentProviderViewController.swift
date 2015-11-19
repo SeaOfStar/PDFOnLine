@@ -10,6 +10,7 @@ import UIKit
 
 class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GroupFrameworkViewControllerDelegate, PDFViewControllerDelegate {
 
+
     var groupDetailController: GroupFrameworkViewController!
     var pdfViewController: PDFViewController!
 
@@ -41,6 +42,8 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
         // 注册全局通知，监听数据更新操作
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("showPDFFromMenu:"), name: MenuTableViewController.notificationKeyForPDF, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,7 +57,12 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             self.tagView.reloadData()
 
+
             if let theIndexPath = self.indexPath {
+                // 滚动tag view
+                let pathForTag = NSIndexPath(forRow: theIndexPath.section, inSection: 0)
+                self.tagView.scrollToItemAtIndexPath(pathForTag, atScrollPosition: .CenteredHorizontally, animated: true)
+
                 let theGroup = self.root?.groups?.objectAtIndex(theIndexPath.section) as? GroupEntity
                 self.groupDetailController.group = theGroup
 
@@ -64,6 +72,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
                 if row < 0 {
                     // 显示group
                     self.bringGroupViewUp()
+                    self.hideTagView(false)
                 }
                 else {
                     // 显示具体的PDF的内容
@@ -96,7 +105,6 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
             self.tagViewUpperDistance.constant = hide ? (-self.tagView.bounds.size.height) : 0.0
             self.tagView.layoutIfNeeded()
         }
-
     }
 
 
@@ -214,5 +222,11 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         }
     }
 
+//    相应侧面菜单上的点击事件
+    func showPDFFromMenu(notification: NSNotification) {
+        if let indexPathFromMenu = notification.userInfo![MenuTableViewController.notificationKeyForIndexPath] {
+            self.indexPath = indexPathFromMenu as? NSIndexPath
+        }
+    }
 
 }
