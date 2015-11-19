@@ -280,14 +280,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                                 <animations/>
                                 <connections>
-                                    <segue destination="bYw-pe-vA5" kind="embed" id="bF7-CN-Ncw"/>
+                                    <segue destination="bYw-pe-vA5" kind="embed" identifier="显示PDF" id="bF7-CN-Ncw"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fc-ja-KeA" userLabel="组view">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                                 <animations/>
                                 <connections>
-                                    <segue destination="nSO-Wu-Sfd" kind="embed" id="5Sw-9k-e3y"/>
+                                    <segue destination="nSO-Wu-Sfd" kind="embed" identifier="显示分组" id="5Sw-9k-e3y"/>
                                 </connections>
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="veu-es-sxe">
@@ -464,7 +464,7 @@
         <!--显示分组内容-->
         <scene sceneID="7up-kd-eTh">
             <objects>
-                <viewController id="nSO-Wu-Sfd" userLabel="显示分组内容" sceneMemberID="viewController">
+                <viewController id="nSO-Wu-Sfd" userLabel="显示分组内容" customClass="GroupFrameworkViewController" customModule="pdfreader" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="apg-HI-SaG"/>
                         <viewControllerLayoutGuide type="bottom" id="mf5-hn-b3i"/>
@@ -538,12 +538,12 @@
                                     <constraint firstAttribute="width" constant="375" id="u2E-Dd-swM"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="00r-HD-5Jb" kind="embed" id="PMq-nT-FGn"/>
+                                    <segue destination="00r-HD-5Jb" kind="embed" identifier="分组列表" id="PMq-nT-FGn"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="0.67129874229999997" green="0.94511598350000003" blue="0.66329163310000006" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SdT-DB-37L" firstAttribute="leading" secondItem="pUi-tY-Xp9" secondAttribute="leading" id="4B1-ar-Qu6"/>
                             <constraint firstItem="Heu-IV-7Ks" firstAttribute="top" secondItem="SdT-DB-37L" secondAttribute="bottom" constant="12" id="5qF-pJ-pMH"/>
@@ -562,16 +562,16 @@
             </objects>
             <point key="canvasLocation" x="1733" y="650.5"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Group List View Controller-->
         <scene sceneID="HeO-td-YxA">
             <objects>
-                <tableViewController id="00r-HD-5Jb" sceneMemberID="viewController">
+                <tableViewController id="00r-HD-5Jb" customClass="GroupListViewController" customModule="pdfreader" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="131" sectionHeaderHeight="22" sectionFooterHeight="22" id="dOF-e4-eb2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="383"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MIBDMessageCell" rowHeight="131" id="Uvz-V0-DZy" customClass="MIBDMessageCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MIBDMessageCell" rowHeight="131" id="Uvz-V0-DZy" customClass="GroupTableViewCell" customModule="pdfreader" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="375" height="131"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uvz-V0-DZy" id="JEs-4q-Qf2">
@@ -656,12 +656,12 @@
                                     <constraint firstAttribute="bottom" secondItem="Bc2-6r-2JN" secondAttribute="bottom" constant="114" id="tIR-FA-bNE"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="arrowView" destination="bl5-g5-IPm" id="HzQ-77-DCV"/>
-                                    <outlet property="descriptionTextView" destination="NnX-xt-nhb" id="Pdw-gA-TKd"/>
-                                    <outlet property="tagLabel" destination="f0B-Ci-Nk1" id="0h5-dq-UHY"/>
-                                    <outlet property="titleImage" destination="7Ph-4I-MgZ" id="PnT-3V-vtX"/>
-                                    <outlet property="titleLabel" destination="RRH-ss-az4" id="PId-Hv-EwT"/>
-                                    <outlet property="topLineView" destination="Bc2-6r-2JN" id="DBk-Q6-G3s"/>
+                                    <outlet property="arrowBackground" destination="bl5-g5-IPm" id="eSZ-oQ-BvX"/>
+                                    <outlet property="iconView" destination="7Ph-4I-MgZ" id="OWa-ZE-We8"/>
+                                    <outlet property="shortIntroduce" destination="NnX-xt-nhb" id="PHQ-rB-seg"/>
+                                    <outlet property="tagLabel" destination="f0B-Ci-Nk1" id="agP-cj-aG0"/>
+                                    <outlet property="titleLabel" destination="RRH-ss-az4" id="pon-EO-TKa"/>
+                                    <outlet property="topLine" destination="Bc2-6r-2JN" id="lhq-zP-Nuh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

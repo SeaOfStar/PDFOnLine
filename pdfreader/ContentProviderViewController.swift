@@ -10,6 +10,10 @@ import UIKit
 
 class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    var groupDetailController: GroupFrameworkViewController!
+    var pdfViewController: PDFViewController!
+
+
     var app: AppDelegate {
         return UIApplication.sharedApplication().delegate as! AppDelegate
     }
@@ -43,18 +47,38 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     func reloadData() {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             self.tagView.reloadData()
+            if let section = self.indexPath?.section {
+                self.groupDetailController.group = self.root?.groups?.objectAtIndex(section) as? GroupEntity
+            }
         }
     }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+
+
+        switch segue.identifier! {
+        case "显示分组":
+            self.groupDetailController = segue.destinationViewController as! GroupFrameworkViewController
+
+        case "显示PDF":
+            self.pdfViewController = segue.destinationViewController as! PDFViewController
+
+        default:
+             break
+        }
+
+//        if segue.identifier == "显示分组" {
+//
+//        }
+//        else if
     }
-    */
+
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -95,7 +119,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.indexPath = NSIndexPath(forRow: 0, inSection: indexPath.row)
+        self.indexPath = NSIndexPath(forRow: -1, inSection: indexPath.row)
     }
 
 }

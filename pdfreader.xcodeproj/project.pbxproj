@@ -33,6 +33,9 @@
 		F899CDDC1BF5D25C006E96B1 /* PDFPageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */; };
 		F899CDDE1BF5D362006E96B1 /* PDFReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */; };
 		F8D1C5361BFC225800D4C3D5 /* TreeTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1C5351BFC225800D4C3D5 /* TreeTask.swift */; };
+		F8D1C5391BFD615700D4C3D5 /* GroupFrameworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1C5381BFD615700D4C3D5 /* GroupFrameworkViewController.swift */; };
+		F8D1C53B1BFD616900D4C3D5 /* GroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1C53A1BFD616900D4C3D5 /* GroupListViewController.swift */; };
+		F8D1C53D1BFD643A00D4C3D5 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1C53C1BFD643A00D4C3D5 /* GroupTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		F899CDDB1BF5D25C006E96B1 /* PDFPageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageLayer.swift; sourceTree = "<group>"; };
 		F899CDDD1BF5D362006E96B1 /* PDFReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFReaderView.swift; sourceTree = "<group>"; };
 		F8D1C5351BFC225800D4C3D5 /* TreeTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTask.swift; sourceTree = "<group>"; };
+		F8D1C5381BFD615700D4C3D5 /* GroupFrameworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupFrameworkViewController.swift; sourceTree = "<group>"; };
+		F8D1C53A1BFD616900D4C3D5 /* GroupListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListViewController.swift; sourceTree = "<group>"; };
+		F8D1C53C1BFD643A00D4C3D5 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +145,7 @@
 		F8227E561BF5942200A8F7A5 /* 内容 */ = {
 			isa = PBXGroup;
 			children = (
+				F8D1C5371BFD60E100D4C3D5 /* 显示分组的详细内容 */,
 				F899CDD31BF5BC6B006E96B1 /* PDf读取 */,
 				F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */,
 				F8227E571BF5942D00A8F7A5 /* 分组 */,
@@ -181,6 +188,16 @@
 				F8160AE81BF9BC360077898B /* 特别关注介绍.pdf */,
 			);
 			name = "temp Resource";
+			sourceTree = "<group>";
+		};
+		F8D1C5371BFD60E100D4C3D5 /* 显示分组的详细内容 */ = {
+			isa = PBXGroup;
+			children = (
+				F8D1C5381BFD615700D4C3D5 /* GroupFrameworkViewController.swift */,
+				F8D1C53A1BFD616900D4C3D5 /* GroupListViewController.swift */,
+				F8D1C53C1BFD643A00D4C3D5 /* GroupTableViewCell.swift */,
+			);
+			name = "显示分组的详细内容";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,9 +287,12 @@
 				F8D1C5361BFC225800D4C3D5 /* TreeTask.swift in Sources */,
 				F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */,
 				F8160AE21BF9A6080077898B /* FileEntity+CoreDataProperties.swift in Sources */,
+				F8D1C5391BFD615700D4C3D5 /* GroupFrameworkViewController.swift in Sources */,
 				F8160ADF1BF9A6080077898B /* TreeEntity.swift in Sources */,
 				F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */,
 				F8160AE01BF9A6080077898B /* GroupEntity+CoreDataProperties.swift in Sources */,
+				F8D1C53D1BFD643A00D4C3D5 /* GroupTableViewCell.swift in Sources */,
+				F8D1C53B1BFD616900D4C3D5 /* GroupListViewController.swift in Sources */,
 				F8160ADE1BF9A6080077898B /* TreeEntity+CoreDataProperties.swift in Sources */,
 				F88D95CD1BFB1BE9000FA050 /* MenuTableViewController.swift in Sources */,
 				F88D95C91BFAC7F6000FA050 /* BinaryEntity+CoreDataProperties.swift in Sources */,
