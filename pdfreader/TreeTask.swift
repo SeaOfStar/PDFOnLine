@@ -80,7 +80,7 @@ class TreeTask {
                     try self.context.save()
 
                     // 发送全局通知，通知数据已经更新
-                    NSNotificationCenter.defaultCenter().postNotificationName(PDFFileManager.menuUpdatedNotificationKey, object: self)
+                    NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.menuUpdatedNotificationKey, object: self)
 
                 } catch {
                     // Replace this implementation with code to handle the error appropriately.
