@@ -389,6 +389,7 @@
                         <outlet property="groupContainer" destination="1fc-ja-KeA" id="Qgx-3g-igO"/>
                         <outlet property="pdfContainer" destination="GHx-Qm-yY6" id="BsG-eQ-XMt"/>
                         <outlet property="tagView" destination="veu-es-sxe" id="4GH-xo-Ngg"/>
+                        <outlet property="tagViewUpperDistance" destination="2Oe-cL-xPa" id="xr2-y3-f88"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FvY-7J-XyW" userLabel="First Responder" sceneMemberID="firstResponder"/>

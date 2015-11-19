@@ -30,4 +30,26 @@ class TreeEntity: NSManagedObject {
         return nil
     }
 
+
+    func indexPathForFile(targetFile: FileEntity) -> NSIndexPath? {
+
+        var result:NSIndexPath?
+
+        if let groups = self.groups {
+            groups.enumerateObjectsUsingBlock({ (group, groupIndex, stop) -> Void in
+                let theGroup = group as! GroupEntity
+                if let files = theGroup.files {
+                    files.enumerateObjectsUsingBlock({ (file, fileIndex, fileStop) -> Void in
+                        let theFile = file as! FileEntity
+                        if theFile.fileID == targetFile.fileID {
+                            result = NSIndexPath(forRow: fileIndex, inSection: groupIndex)
+                        }
+                    })
+                }
+            })
+        }
+
+        return result
+    }
+
 }

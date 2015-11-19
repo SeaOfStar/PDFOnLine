@@ -8,7 +8,21 @@
 
 import UIKit
 
+protocol PDFViewControllerDelegate: NSObjectProtocol {
+    // 在PDF上的下划操作
+    func didSwipeDownAtController(pdfController: PDFViewController)
+
+//    func didChangePDFFile(pdfController: PDFViewController)
+
+    // 文章变换
+    func reachEndOfPDFInController(controller: PDFViewController)
+    func reachTopOfPDFInController(controller: PDFViewController)
+}
+
+
 class PDFViewController: UIViewController, PDFReaderViewDelegate {
+
+    weak var delegate: PDFViewControllerDelegate?
 
     @IBOutlet weak var PDFReader: PDFReaderView!
 
@@ -36,6 +50,11 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
         // Do any additional setup after loading the view.
         PDFReader.delegate = self
+
+        // 添加下滑的手势操作用于显示tag列表
+        let swipe = UISwipeGestureRecognizer(target: self, action: Selector("swipeDownAction:"))
+        swipe.direction = .Down
+        view .addGestureRecognizer(swipe)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,15 +64,15 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
 
     func didReachEndOfPDFView(view: PDFReaderView) {
-        if let next = pdf?.nextFile {
-            pdf = next
-        }
+        self.delegate?.reachEndOfPDFInController(self)
     }
 
     func didReachTopOfPDFView(view: PDFReaderView) {
-        if let last = pdf?.lastFile {
-            pdf = last
-        }
+        self.delegate?.reachTopOfPDFInController(self)
+    }
+
+    func swipeDownAction(sender: AnyObject) {
+        self.delegate?.didSwipeDownAtController(self)
     }
 
     /*

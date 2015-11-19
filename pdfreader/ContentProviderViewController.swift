@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GroupFrameworkViewControllerDelegate {
+class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GroupFrameworkViewControllerDelegate, PDFViewControllerDelegate {
 
     var groupDetailController: GroupFrameworkViewController!
     var pdfViewController: PDFViewController!
@@ -17,6 +17,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     @IBOutlet weak var pdfContainer: UIView!
     @IBOutlet weak var groupContainer: UIView!
 
+    @IBOutlet weak var tagViewUpperDistance: NSLayoutConstraint!
 
 
     var app: AppDelegate {
@@ -36,7 +37,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.indexPath = NSIndexPath(forRow: -1, inSection: 2)
+//        self.indexPath = NSIndexPath(forRow: -1, inSection: 2)
 
         // 注册全局通知，监听数据更新操作
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
@@ -75,17 +76,26 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     }
 
     func doShowPDF(file: FileEntity) {
-        bringPDFViewToTop()
-        hideTagView()
+        bringPDFViewUp()
+        hideTagView(true)
 
         pdfViewController.pdf = file
     }
 
-    func bringPDFViewToTop() {
-        view.bringSubviewToFront(pdfContainer)
+    func bringPDFViewUp() {
+        view.sendSubviewToBack(groupContainer)
     }
 
-    func hideTagView() {
+    func bringGroupViewUp() {
+        view.sendSubviewToBack(groupContainer)
+    }
+
+    func hideTagView(hide: Bool) {
+
+        UIView.animateWithDuration(0.7) { () -> Void in
+            self.tagViewUpperDistance.constant = hide ? (-self.tagView.bounds.size.height) : 0.0
+            self.tagView.layoutIfNeeded()
+        }
 
     }
 
@@ -105,6 +115,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
         case "显示PDF":
             self.pdfViewController = segue.destinationViewController as! PDFViewController
+            self.pdfViewController.delegate = self
 
         default:
              break
@@ -170,5 +181,40 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
             }
         }
     }
+
+//    MARK: - 用户在pdf页面下滑操作
+    func didSwipeDownAtController(pdfViewController: PDFViewController) {
+        hideTagView(false)
+    }
+
+//    MARK: 滑动后PDF文件变化
+    func reachEndOfPDFInController(controller: PDFViewController) {
+        if let old = controller.pdf {
+            if let newOne = old.nextFile {
+                indexPath = self.root?.indexPathForFile(newOne)
+            }
+        }
+    }
+
+    func reachTopOfPDFInController(controller: PDFViewController) {
+        if let old = controller.pdf {
+            if let newOne = old.lastFile {
+                indexPath = self.root?.indexPathForFile(newOne)
+            }
+        }
+    }
+
+    func didChangePDFFile(pdfController: PDFViewController) {
+        let pdf = pdfController.pdf!
+        let showSection = root!.groups!.indexOfObject(pdf.ownerGroup!)
+
+        let highlightSection = self.indexPath!.section
+
+        if highlightSection != showSection {
+            // 调整tagview中显示的高亮位置
+
+        }
+    }
+
 
 }
