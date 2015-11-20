@@ -166,13 +166,9 @@ class MenuTableViewController: UITableViewController {
     }
 
     private func checkResult() {
-
-        print("checkResult")
-
         if let theGroups = self.root?.groups {
             for group in theGroups {
                 let theGroup = group as! GroupEntity
-                //                print("group[\(theGroup.name), \(theGroup.files)]")
                 print("列表中：[\(theGroup.name)]")
 
                 if let theFiles = theGroup.files {

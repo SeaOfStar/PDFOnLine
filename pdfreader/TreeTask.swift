@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 protocol TreeTaskDelegate : NSObjectProtocol {
+    func taskDidFinishedMenu(task: TreeTask)
     func taskDidFinishedCache(task: TreeTask)
 }
 
@@ -21,11 +22,21 @@ class TreeTask {
 
     weak var delegate: TreeTaskDelegate?
 
+    // 定义一个监视下载状态变化时的闭包通知函数
+    var downLoadChangeAction: (()->Void)?
+    var downLoadFinishAction: (()->Void)?
 
+    // 下载状态标示
+    var downloadStaus: (done: UInt, total: UInt) = (0, 0) {
+        didSet {
+            downLoadChangeAction?()
+        }
+    }
 
     init() {
         queue = NSOperationQueue()
         queue.name = "目录信息后台"
+        queue.maxConcurrentOperationCount = 3
     }
 
     func fetch() {
@@ -38,6 +49,10 @@ class TreeTask {
 
         let cacheOpreation = NSBlockOperation { () -> Void in
             self.saveContext()
+
+            // 通知委托者，目录结构生成完毕
+            self.delegate?.taskDidFinishedMenu(self)
+
             self.cacheBinarysInTree()
         }
 
@@ -95,7 +110,7 @@ class TreeTask {
 
     private var reportOperation: NSBlockOperation {
         return NSBlockOperation(block: { () -> Void in
-            print("缓冲完成")
+            self.downLoadFinishAction?()
 
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.delegate?.taskDidFinishedCache(self)
@@ -106,8 +121,13 @@ class TreeTask {
 //    MARK: - 相关操作
     private func cacheBinarysInTree() {
 
+
         if let bins = root?.caches {
             let report = reportOperation
+
+            // 统计数据信息
+            self.downloadStaus = (0, UInt(bins.count))
+
             for entity in bins {
                 let binEntity = entity as! BinaryEntity
                 let cacheOperation = binaryDownloadOpreationForEntity(binEntity)
@@ -131,7 +151,10 @@ class TreeTask {
             if let data = self.receivedData {
                 do {
                     let jsonObj = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions())
-                    self.jsonObject = jsonObj["result"] as! [String:AnyObject]
+                    if let receivedResult = jsonObj["result"] {
+                        self.jsonObject = receivedResult as! [String:AnyObject]
+                    }
+
                 } catch {}
             }
         })
@@ -194,19 +217,25 @@ class TreeTask {
         return NSBlockOperation(block: { () -> Void in
             if let _ = bin.data {
                 // 已经存在缓冲数据
+                self.downloadStaus = (self.downloadStaus.done + 1, self.downloadStaus.total)
                 return
             }
 
             if let url = NSURL(string: bin.remoteURL!) {
+
                 if let data = NSData(contentsOfURL: url) {
                     bin.data = data
 
-                    print("下载完成：\(bin.remoteURL)")
+//                    print("下载完成：\(bin.remoteURL)")
 
                     do {
                         try self.context.save()
+                        self.downloadStaus = (self.downloadStaus.done + 1, self.downloadStaus.total)
+                        print("下载：【\(self.downloadStaus)】-> \(bin.remoteURL)")
                     } catch {
-                        NSLog("保存数据出错")
+                        NSLog("保存数据出错：\(bin.remoteURL)")
+                        let nserror = error as NSError
+                        NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                     }
                 }
             }

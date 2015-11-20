@@ -96,11 +96,20 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-EU-eCJ">
+                                        <rect key="frame" x="592" y="15" width="0.0" height="0.0"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="NDO-EU-eCJ" firstAttribute="centerY" secondItem="2Xj-dA-jqU" secondAttribute="centerY" id="3MN-p4-TSp"/>
                                     <constraint firstAttribute="trailing" secondItem="wmJ-r4-llO" secondAttribute="trailing" constant="20" symbolic="YES" id="3oq-OJ-cBA"/>
+                                    <constraint firstAttribute="trailing" secondItem="NDO-EU-eCJ" secondAttribute="trailing" constant="8" id="7it-Uo-Rff"/>
                                     <constraint firstItem="wmJ-r4-llO" firstAttribute="bottom" secondItem="2Xj-dA-jqU" secondAttribute="bottom" id="dY8-09-yhN"/>
                                     <constraint firstAttribute="height" constant="30" id="jzv-pi-8Ig"/>
                                     <constraint firstItem="wmJ-r4-llO" firstAttribute="leading" secondItem="2Xj-dA-jqU" secondAttribute="leading" constant="20" symbolic="YES" id="lrl-p0-cK7"/>
@@ -165,6 +174,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downloadStatusLabel" destination="NDO-EU-eCJ" id="Dwh-1K-JQS"/>
                         <outlet property="maskView" destination="er4-fP-6zP" id="kdA-o7-S1M"/>
                         <outlet property="menuContainerView" destination="DfG-0l-QeN" id="3Ei-b9-R1z"/>
                         <outlet property="menuLeftEdge" destination="tQo-HR-moS" id="EKw-bX-MzE"/>
@@ -484,13 +494,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="625-MS-BGJ" userLabel="上部group颜色">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.92448788879999999" green="0.61235290769999995" blue="0.59966623779999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="54" id="Iu5-24-cZ5"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfv-3w-EWG">
-                                        <rect key="frame" x="16" y="55" width="40" height="43"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfv-3w-EWG">
+                                        <rect key="frame" x="16" y="55" width="0.0" height="43"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="dVW-Z6-WvU"/>

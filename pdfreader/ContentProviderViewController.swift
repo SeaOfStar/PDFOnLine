@@ -59,6 +59,15 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             self.tagView.reloadData()
 
+            if let _ = self.root {
+                if let _ = self.indexPath {
+
+                }
+                else {
+                    self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
+                }
+            }
+
 
             if let theIndexPath = self.indexPath {
                 // 滚动tag view

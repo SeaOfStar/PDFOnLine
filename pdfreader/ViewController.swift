@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var menuContainerView: UIView!
     @IBOutlet weak var menuLeftEdge: NSLayoutConstraint!
 
+    @IBOutlet weak var downloadStatusLabel: UILabel!
+
     var showMenu = false {
         didSet {
             if showMenu {
@@ -45,6 +47,26 @@ class ViewController: UIViewController {
 
         // 收到任何菜单传来的通知都隐藏菜单
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("closeMenuButtonAction:"), name: MenuTableViewController.notificationKeyForPDF, object: nil)
+
+        let app = UIApplication.sharedApplication().delegate as! AppDelegate
+        let task = app.task
+
+        // 下载状态变化时的通知回调
+        task.downLoadChangeAction = { () -> Void in
+            let status = "下载：[\(task.downloadStaus.done)/\(task.downloadStaus.total)] "
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.downloadStatusLabel.text = status
+            })
+        }
+
+        task.downLoadFinishAction = { () -> Void in
+            let info = "共计：\(task.downloadStaus.total)，失败：\(task.downloadStaus.total - task.downloadStaus.done)"
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.downloadStatusLabel.text = info
+            })
+
+        }
+
     }
 
     override func didReceiveMemoryWarning() {

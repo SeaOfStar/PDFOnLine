@@ -143,5 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TreeTaskDelegate {
         refreshRoot()
     }
 
+
+    func taskDidFinishedMenu(task: TreeTask) {
+        refreshRoot()
+    }
+
 }
 
