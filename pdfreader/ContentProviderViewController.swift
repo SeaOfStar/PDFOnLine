@@ -198,6 +198,34 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
             }
         }
     }
+    // MARK: 用户在分组页面上左右滑动
+    func didRequestToNextGroup(groupController: GroupFrameworkViewController) {
+        if let theGroup = groupController.group {
+            if let section = root?.groups?.indexOfObject(theGroup) {
+                // 循环移动
+                if section < (root!.groups!.count - 1) {
+                    self.indexPath = NSIndexPath(forRow: -1, inSection: (section + 1))
+                }
+                else {
+                    self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
+                }
+            }
+        }
+    }
+
+    func didRequestToLastGroup(groupController: GroupFrameworkViewController) {
+        if let theGroup = groupController.group {
+            if let section = root?.groups?.indexOfObject(theGroup) {
+                // 循环移动
+                if section > 0 {
+                    self.indexPath = NSIndexPath(forRow: -1, inSection: (section - 1))
+                }
+                else {
+                    self.indexPath = NSIndexPath(forRow: -1, inSection: (root!.groups!.count - 1))
+                }
+            }
+        }
+    }
 
 //    MARK: - 用户在pdf页面下滑操作
     func didSwipeDownAtController(pdfViewController: PDFViewController) {

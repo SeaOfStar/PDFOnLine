@@ -11,6 +11,8 @@ import UIKit
 protocol GroupFrameworkViewControllerDelegate: NSObjectProtocol {
     // 用户点击了group中的数据
     func groupController(groupController: GroupFrameworkViewController, didSelectedCellAtIndex index:Int)
+    func didRequestToNextGroup(groupController: GroupFrameworkViewController)
+    func didRequestToLastGroup(groupController: GroupFrameworkViewController)
 }
 
 class GroupFrameworkViewController: UIViewController, GroupListViewControllerDelegate {
@@ -38,7 +40,32 @@ class GroupFrameworkViewController: UIViewController, GroupListViewControllerDel
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        // 在自己的页面上添加左右滑动的手势
+
+        configGestureRecognizer()
+
     }
+
+    func configGestureRecognizer() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipeLeftAction:"))
+        swipeLeft.direction = .Left
+        view.addGestureRecognizer(swipeLeft)
+
+        let swipRight = UISwipeGestureRecognizer(target: self, action: Selector("swipeRightAction:"))
+        swipRight.direction = .Right
+        view.addGestureRecognizer(swipRight)
+    }
+
+    func swipeLeftAction(sender: UISwipeGestureRecognizer) {
+        self.delegate?.didRequestToNextGroup(self)
+    }
+    
+    func swipeRightAction(sender: UISwipeGestureRecognizer) {
+        self.delegate?.didRequestToLastGroup(self)
+    }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
