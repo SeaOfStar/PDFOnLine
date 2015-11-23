@@ -50,7 +50,9 @@ class TreeTask {
             self.saveContext()
 
             // 通知委托者，目录结构生成完毕
-            self.delegate?.taskDidFinishedMenu(self)
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.delegate?.taskDidFinishedMenu(self)
+            })
 
             self.cacheBinarysInTree()
         }
@@ -132,7 +134,7 @@ class TreeTask {
                 report.addDependency(cacheOperation)
                 self.queue.addOperation(cacheOperation)
             }
-            self.queue .addOperation(report)
+            self.queue.addOperation(report)
         }
     }
 
@@ -145,6 +147,8 @@ class TreeTask {
     private var jsonParseOpreation: NSBlockOperation {
         return NSBlockOperation(block: { () -> Void in
             if let data = self.receivedData {
+                let string = String(data: data, encoding: NSUTF8StringEncoding)
+                print(string)
                 do {
                     let jsonObj = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions())
                     if let receivedResult = jsonObj["result"] {
