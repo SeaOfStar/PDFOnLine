@@ -16,7 +16,8 @@ class MenuTableViewController: UITableViewController {
 
     static let buttonTagBase = 456
 
-    var root: TreeEntity? = {
+    var root: TreeEntity?
+    func refetchRoot() {
         // 做检索，检索出最新的数据
         let request = NSFetchRequest(entityName: "TreeEntity")
         request.predicate = NSPredicate(value: true)
@@ -26,11 +27,11 @@ class MenuTableViewController: UITableViewController {
         do {
             let app = UIApplication.sharedApplication().delegate as! AppDelegate
             let trees = try app.managedObjectContext.executeFetchRequest(request)
-            return trees.first as? TreeEntity
+            self.root = trees.first as? TreeEntity
         } catch {
-            return nil
+            self.root = nil
         }
-    }()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,21 +42,20 @@ class MenuTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
-        reloadData()
+        refetchRoot()
 
         tableView.tableFooterView = UIView()
 
 
         // 注册全局通知监听menu的更新
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("resetAll"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
     }
 
-    func reloadData() {
-        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-//            self.checkResult()
-            self.tableView.reloadData()
-        }
+    func resetAll() {
+        self.refetchRoot()
+        self.tableView.reloadData()
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

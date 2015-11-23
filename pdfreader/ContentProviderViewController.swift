@@ -26,7 +26,8 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         return UIApplication.sharedApplication().delegate as! AppDelegate
     }
 
-    lazy var root: TreeEntity? = {
+    var root: TreeEntity?
+    func refetchRoot() {
         // 做检索，检索出最新的数据
         let request = NSFetchRequest(entityName: "TreeEntity")
         request.predicate = NSPredicate(value: true)
@@ -35,11 +36,11 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
         do {
             let trees = try self.app.managedObjectContext.executeFetchRequest(request)
-            return trees.first as? TreeEntity
+            self.root = trees.first as? TreeEntity
         } catch {
-            return nil
+            self.root = nil
         }
-    }()
+    }
 
 
     var indexPath: NSIndexPath? {
@@ -50,6 +51,8 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        refetchRoot()
 
         if let _ = self.root {
             self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
@@ -70,11 +73,9 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
 
     func resetAll() {
         // 强制清空原来的检索结果
-        self.root = nil
+        self.refetchRoot()
         if let _ = self.root {
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
-            })
+            self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
         }
     }
 
