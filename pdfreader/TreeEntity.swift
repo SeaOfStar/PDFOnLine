@@ -52,4 +52,22 @@ class TreeEntity: NSManagedObject {
         return result
     }
 
+    func binEntityForURLString(url: String) -> BinaryEntity? {
+        if let context = self.managedObjectContext {
+            // 不直接查找内容，检索数据库，节省内存使用量
+            let request = NSFetchRequest(entityName: "BinaryEntity")
+            request.predicate = NSPredicate(format: "remoteURL = %@", url)
+            request.sortDescriptors = [NSSortDescriptor(key: "remoteURL", ascending: true)]
+
+            do {
+                let result = try context.executeFetchRequest(request)
+                return result.first as? BinaryEntity
+            } catch {
+                return nil
+            }
+        }
+
+        return nil
+    }
+
 }

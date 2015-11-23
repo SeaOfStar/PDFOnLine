@@ -23,12 +23,10 @@ class TreeTask {
 
     weak var delegate: TreeTaskDelegate?
 
-    // 定义一个监视下载状态变化时的闭包通知函数
-//    var downLoadChangeAction: (()->Void)?
-//    var downLoadFinishAction: (()->Void)?
+    var urlStringsToCached = NSMutableSet()
 
     // 下载状态标示
-    var downloadStaus: (done: UInt, total: UInt) = (0, 0) {
+    var downloadStaus: (done: Int, total: Int) = (0, 0) {
         didSet {
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.delegate?.binaryDownloadStatusDidChanged(self)
@@ -39,6 +37,7 @@ class TreeTask {
     init() {
         queue = NSOperationQueue()
         queue.name = "目录信息后台"
+        queue.maxConcurrentOperationCount = 3
     }
 
     func fetch() {
@@ -93,20 +92,21 @@ class TreeTask {
 
     func saveContext () {
 
-        queue.addOperationWithBlock { () -> Void in
-            if self.context.hasChanges {
-                do {
-                    try self.context.save()
+        if self.context.hasChanges {
+            do {
+                try self.context.save()
 
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nserror = error as NSError
-                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                    abort()
-                }
+                NSLog("保存数据信息")
+
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                abort()
             }
         }
+
     }
 
     private var reportOperation: NSBlockOperation {
@@ -119,22 +119,68 @@ class TreeTask {
 
 //    MARK: - 相关操作
     private func cacheBinarysInTree() {
-        if let bins = root?.caches {
-            let report = reportOperation
 
-            // 统计数据信息
-            self.downloadStaus = (0, UInt(bins.count))
+        self.downloadStaus = (0, self.urlStringsToCached.count)
 
-            for entity in bins {
-                let binEntity = entity as! BinaryEntity
-                let cacheOperation = binaryDownloadOpreationForEntity(binEntity)
+        let report = reportOperation
 
-                // 回报操作要依赖于所有的缓冲操作完成
-                report.addDependency(cacheOperation)
-                self.queue.addOperation(cacheOperation)
-            }
-            self.queue.addOperation(report)
+        for urlString in urlStringsToCached {
+            let cacheOperation = NSBlockOperation(block: { () -> Void in
+                let theString = urlString as! String
+                let url = NSURL(string: theString)
+                let data = NSData(contentsOfURL: url!)
+
+                // 检索数据
+
+                let request = NSFetchRequest(entityName: "BinaryEntity")
+                request.predicate = NSPredicate(format: "remoteURL = %@", theString)
+                request.sortDescriptors = [NSSortDescriptor(key: "remoteURL", ascending: true)]
+
+                do {
+                    let results = try self.context.executeFetchRequest(request)
+
+                    for entity in results {
+                        let bin = entity as! BinaryEntity
+                        bin.data = data
+
+                        NSLog("保存：【%@】", theString)
+                    }
+
+                    ++self.downloadStaus.done
+
+                    self.saveContext()
+
+                } catch {
+                }
+
+            })
+
+            report.addDependency(cacheOperation)
+
+            self.queue.addOperation(cacheOperation)
         }
+
+        self.queue.addOperation(report)
+
+//        if let bins = root?.caches {
+//            let report = reportOperation
+//
+//            // 统计数据信息
+//            self.downloadStaus = (0, UInt(bins.count))
+//
+//            for entity in bins {
+//                let binEntity = entity as! BinaryEntity
+//
+////                binEntity.cacheDataInQueue(self.queue)
+//
+//                let cacheOperation = binaryDownloadOpreationForEntity(binEntity)
+//
+//                // 回报操作要依赖于所有的缓冲操作完成
+//                report.addDependency(cacheOperation)
+//                self.queue.addOperation(cacheOperation)
+//            }
+//            self.queue.addOperation(report)
+//        }
     }
 
     private var fetchDataOpreation: NSBlockOperation {
@@ -197,14 +243,11 @@ class TreeTask {
                         let iconURLString = info["fileimageurl"] as! String
                         let icon = self.fetchOrCreateBinaryEntityForURL(iconURLString)
                         newFile.icon = icon;
-                        icon.root = root
 
 
                         let dataURLString = info["fileurl"] as! String
                         let data = self.fetchOrCreateBinaryEntityForURL(dataURLString)
                         newFile.data = data
-                        data.root = root
-                        
                         return newFile
                     })
                 }
@@ -271,11 +314,19 @@ class TreeTask {
 
     private func fetchOrCreateBinaryEntityForURL(urlString: String) -> BinaryEntity! {
         if let old = binaryForURL(urlString) {
+            if old.data == nil {
+                if let remoteURL = old.remoteURL {
+                    self.urlStringsToCached.addObject(remoteURL)
+                }
+            }
             return old
         }
         else {
             let newBin = NSEntityDescription.insertNewObjectForEntityForName("BinaryEntity", inManagedObjectContext: context) as! BinaryEntity
             newBin.remoteURL = urlString
+
+            // 记录下所有没有缓冲过的URL
+            self.urlStringsToCached.addObject(urlString)
             return newBin
         }
     }
