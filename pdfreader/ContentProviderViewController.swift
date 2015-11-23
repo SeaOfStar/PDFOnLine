@@ -72,45 +72,45 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         // 强制清空原来的检索结果
         self.root = nil
         if let _ = self.root {
-            self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
+            })
         }
     }
 
     func reloadData() {
-        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            self.tagView.reloadData()
+        self.tagView.reloadData()
 
-            if let _ = self.root {
-                if let _ = self.indexPath {
+        if let _ = self.root {
+            if let _ = self.indexPath {
 
-                }
-                else {
-                    self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
-                }
             }
+            else {
+                self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
+            }
+        }
 
 
-            if let theIndexPath = self.indexPath {
-                // 滚动tag view
-                let pathForTag = NSIndexPath(forRow: theIndexPath.section, inSection: 0)
-                self.tagView.scrollToItemAtIndexPath(pathForTag, atScrollPosition: .CenteredHorizontally, animated: true)
+        if let theIndexPath = self.indexPath {
+            // 滚动tag view
+            let pathForTag = NSIndexPath(forRow: theIndexPath.section, inSection: 0)
+            self.tagView.scrollToItemAtIndexPath(pathForTag, atScrollPosition: .CenteredHorizontally, animated: true)
 
-                let theGroup = self.root?.groups?.objectAtIndex(theIndexPath.section) as? GroupEntity
-                self.groupDetailController.group = theGroup
+            let theGroup = self.root?.groups?.objectAtIndex(theIndexPath.section) as? GroupEntity
+            self.groupDetailController.group = theGroup
 
-                // 判断是否显示内容的依据是row是否合法
-                // row 小于0则显示group信息，反之则显示对应的PDF
-                let row = theIndexPath.row
-                if row < 0 {
-                    // 显示group
-                    self.bringGroupViewUp()
-                    self.hideTagView(false)
-                }
-                else {
-                    // 显示具体的PDF的内容
-                    if let pdf = theGroup?.files?.objectAtIndex(row) as? FileEntity {
-                        self.doShowPDF(pdf)
-                    }
+            // 判断是否显示内容的依据是row是否合法
+            // row 小于0则显示group信息，反之则显示对应的PDF
+            let row = theIndexPath.row
+            if row < 0 {
+                // 显示group
+                self.bringGroupViewUp()
+                self.hideTagView(false)
+            }
+            else {
+                // 显示具体的PDF的内容
+                if let pdf = theGroup?.files?.objectAtIndex(row) as? FileEntity {
+                    self.doShowPDF(pdf)
                 }
             }
         }
