@@ -57,35 +57,27 @@ class ViewController: UIViewController, TreeTaskDelegate {
         let task = TreeTask()
         task.delegate = self
 
-        // 下载状态变化时的通知回调
-        task.downLoadChangeAction = { () -> Void in
-            let status = "下载：[\(task.downloadStaus.done)/\(task.downloadStaus.total)] "
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                self.downloadStatusLabel.text = status
-            })
-        }
-
-        task.downLoadFinishAction = { () -> Void in
-            let info = "共计：\(task.downloadStaus.total)，失败：\(task.downloadStaus.total - task.downloadStaus.done)"
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                self.downloadStatusLabel.text = info
-            })
-
-        }
-
         task.fetch()
     }
 
     // mark - task的回调操作
     func taskDidFinishedMenu(task: TreeTask) {
         print("菜单取得完成")
+        self.downloadStatusLabel.text = "开始缓冲文件..."
+    }
+
+    func binaryDownloadStatusDidChanged(task: TreeTask) {
+        let info = "\(task.downloadStaus.done) / \(task.downloadStaus.total)"
+        self.downloadStatusLabel.text = info
     }
 
     func taskDidFinishedCache(task: TreeTask) {
         print("数据缓冲完成")
         // 发送全局通知，通知数据已经更新
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.menuUpdatedNotificationKey, object: self)
+        let info = "共计：\(task.downloadStaus.total)，失败：\(task.downloadStaus.total - task.downloadStaus.done)"
+        self.downloadStatusLabel.text = info
 
+        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.menuUpdatedNotificationKey, object: self)
     }
 
 

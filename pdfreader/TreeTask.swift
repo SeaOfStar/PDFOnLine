@@ -12,6 +12,7 @@ import CoreData
 protocol TreeTaskDelegate : NSObjectProtocol {
     func taskDidFinishedMenu(task: TreeTask)
     func taskDidFinishedCache(task: TreeTask)
+    func binaryDownloadStatusDidChanged(task: TreeTask)
 }
 
 class TreeTask {
@@ -23,13 +24,15 @@ class TreeTask {
     weak var delegate: TreeTaskDelegate?
 
     // 定义一个监视下载状态变化时的闭包通知函数
-    var downLoadChangeAction: (()->Void)?
-    var downLoadFinishAction: (()->Void)?
+//    var downLoadChangeAction: (()->Void)?
+//    var downLoadFinishAction: (()->Void)?
 
     // 下载状态标示
     var downloadStaus: (done: UInt, total: UInt) = (0, 0) {
         didSet {
-            downLoadChangeAction?()
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.delegate?.binaryDownloadStatusDidChanged(self)
+            })
         }
     }
 
@@ -108,8 +111,6 @@ class TreeTask {
 
     private var reportOperation: NSBlockOperation {
         return NSBlockOperation(block: { () -> Void in
-            self.downLoadFinishAction?()
-
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.delegate?.taskDidFinishedCache(self)
             })
@@ -118,8 +119,6 @@ class TreeTask {
 
 //    MARK: - 相关操作
     private func cacheBinarysInTree() {
-
-
         if let bins = root?.caches {
             let report = reportOperation
 
