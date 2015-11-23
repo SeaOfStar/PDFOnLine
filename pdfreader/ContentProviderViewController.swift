@@ -254,6 +254,10 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         hideTagView(false)
     }
 
+    func didSwipeUpAtController(pdfViewController: PDFViewController) {
+        hideTagView(true)
+    }
+
 //    MARK: 滑动后PDF文件变化
     func reachEndOfPDFInController(controller: PDFViewController) {
         if let old = controller.pdf {
