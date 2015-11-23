@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GroupFrameworkViewControllerDelegate, PDFViewControllerDelegate {
 
@@ -21,13 +22,25 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     @IBOutlet weak var tagViewUpperDistance: NSLayoutConstraint!
 
 
-    var app: AppDelegate {
+    var app: AppDelegate! {
         return UIApplication.sharedApplication().delegate as! AppDelegate
     }
 
-    var root: TreeEntity? {
-        return app.root
-    }
+    lazy var root: TreeEntity? = {
+        // 做检索，检索出最新的数据
+        let request = NSFetchRequest(entityName: "TreeEntity")
+        request.predicate = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "refreshTime", ascending: false)
+        request.sortDescriptors = [sort]
+
+        do {
+            let trees = try self.app.managedObjectContext.executeFetchRequest(request)
+            return trees.first as? TreeEntity
+        } catch {
+            return nil
+        }
+    }()
+
 
     var indexPath: NSIndexPath? {
         didSet {
@@ -43,7 +56,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
         }
 
         // 注册全局通知，监听数据更新操作
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadData"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("resetAll"), name: AppDelegate.menuUpdatedNotificationKey, object: nil)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("showPDFFromMenu:"), name: MenuTableViewController.notificationKeyForPDF, object: nil)
     }
@@ -54,6 +67,14 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     }
 
     @IBOutlet weak var tagView: UICollectionView!
+
+    func resetAll() {
+        // 强制清空原来的检索结果
+        self.root = nil
+        if let _ = self.root {
+            self.indexPath = NSIndexPath(forRow: -1, inSection: 0)
+        }
+    }
 
     func reloadData() {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in

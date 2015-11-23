@@ -10,44 +10,14 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, TreeTaskDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static let menuUpdatedNotificationKey = "目录数据已经更新"
 
     var window: UIWindow?
 
-    var root: TreeEntity?
-
-    var task: TreeTask = TreeTask()
-
-    func refreshRoot() {
-        // 做检索，检索出最新的数据
-        let request = NSFetchRequest(entityName: "TreeEntity")
-        request.predicate = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "refreshTime", ascending: false)
-        request.sortDescriptors = [sort]
-
-        do {
-            let trees = try managedObjectContext.executeFetchRequest(request)
-            self.root = trees.first as? TreeEntity
-
-            // 全局通知，通知画面更新
-            NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.menuUpdatedNotificationKey, object: self)
-        } catch {
-            self.root = nil
-        }
-    }
-
-    
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
-        refreshRoot()
-
-        task.delegate = self
-        task.fetch()
-
         return true
     }
 
@@ -138,15 +108,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TreeTaskDelegate {
             }
         }
     }
-
-    func taskDidFinishedCache(task: TreeTask) {
-        refreshRoot()
-    }
-
-
-    func taskDidFinishedMenu(task: TreeTask) {
-        refreshRoot()
-    }
-
 }
 

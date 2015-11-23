@@ -16,17 +16,21 @@ class MenuTableViewController: UITableViewController {
 
     static let buttonTagBase = 456
 
-    var root: TreeEntity? {
-        return appDelegate.root
-    }
+    var root: TreeEntity? = {
+        // 做检索，检索出最新的数据
+        let request = NSFetchRequest(entityName: "TreeEntity")
+        request.predicate = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "refreshTime", ascending: false)
+        request.sortDescriptors = [sort]
 
-    var appDelegate: AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate
-    }
-
-    var managedContext: NSManagedObjectContext {
-        return appDelegate.managedObjectContext
-    }
+        do {
+            let app = UIApplication.sharedApplication().delegate as! AppDelegate
+            let trees = try app.managedObjectContext.executeFetchRequest(request)
+            return trees.first as? TreeEntity
+        } catch {
+            return nil
+        }
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +52,7 @@ class MenuTableViewController: UITableViewController {
 
     func reloadData() {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            self.checkResult()
+//            self.checkResult()
             self.tableView.reloadData()
         }
     }
