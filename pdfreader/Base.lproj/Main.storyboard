@@ -181,6 +181,7 @@
                         <outlet property="maskView" destination="er4-fP-6zP" id="kdA-o7-S1M"/>
                         <outlet property="menuContainerView" destination="DfG-0l-QeN" id="3Ei-b9-R1z"/>
                         <outlet property="menuLeftEdge" destination="tQo-HR-moS" id="EKw-bX-MzE"/>
+                        <outlet property="refreshButton" destination="7W6-9R-HFs" id="Qm1-a1-Npx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -50,8 +50,10 @@ class ViewController: UIViewController, TreeTaskDelegate {
 
     }
 
+    @IBOutlet weak var refreshButton: UIButton!
     @IBAction func refreshButtonAction(sender: UIButton) {
 
+        sender.enabled = false
         self.downloadStatusLabel.text = "数据更新中 ..."
 
         let task = TreeTask()
@@ -78,6 +80,8 @@ class ViewController: UIViewController, TreeTaskDelegate {
         self.downloadStatusLabel.text = info
 
         NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.menuUpdatedNotificationKey, object: self)
+
+        self.refreshButton.enabled = true
     }
 
 
