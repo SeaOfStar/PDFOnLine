@@ -54,14 +54,14 @@
                                             <action selector="menuButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n0u-yw-9Zl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W6-9R-HFs" userLabel="Home Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W6-9R-HFs" userLabel="刷新按钮">
                                         <rect key="frame" x="556" y="11" width="44" height="44"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="6xT-gs-8yP"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" image="刷新">
+                                        <state key="normal" image="cloud">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -72,18 +72,26 @@
                                             <action selector="refreshButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9bg-4r-geT"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleArrow" translatesAutoresizingMaskIntoConstraints="NO" id="cKk-vA-MXL">
+                                        <rect key="frame" x="556" y="11" width="44" height="44"/>
+                                        <animations/>
+                                    </imageView>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="UAn-SO-ibV" firstAttribute="leading" secondItem="42D-d8-ETX" secondAttribute="leading" id="7c9-xy-jb1"/>
+                                    <constraint firstItem="7W6-9R-HFs" firstAttribute="trailing" secondItem="cKk-vA-MXL" secondAttribute="trailing" id="BYz-WE-1HU"/>
                                     <constraint firstItem="UAn-SO-ibV" firstAttribute="top" secondItem="42D-d8-ETX" secondAttribute="top" constant="11" id="CKL-9O-dKu"/>
+                                    <constraint firstItem="7W6-9R-HFs" firstAttribute="bottom" secondItem="cKk-vA-MXL" secondAttribute="bottom" id="I11-Sb-SHM"/>
                                     <constraint firstItem="7W6-9R-HFs" firstAttribute="centerY" secondItem="uiQ-9q-cXi" secondAttribute="centerY" id="Ons-tK-qh3"/>
                                     <constraint firstItem="7W6-9R-HFs" firstAttribute="bottom" secondItem="UAn-SO-ibV" secondAttribute="bottom" id="PiR-NG-p1I"/>
+                                    <constraint firstItem="7W6-9R-HFs" firstAttribute="top" secondItem="cKk-vA-MXL" secondAttribute="top" id="dpv-bJ-dYq"/>
                                     <constraint firstAttribute="height" constant="65" id="eN6-vV-6iO"/>
                                     <constraint firstItem="7W6-9R-HFs" firstAttribute="top" secondItem="UAn-SO-ibV" secondAttribute="top" id="fJ0-ey-nDG"/>
                                     <constraint firstItem="uiQ-9q-cXi" firstAttribute="centerX" secondItem="42D-d8-ETX" secondAttribute="centerX" id="nmu-Zr-fG8"/>
                                     <constraint firstAttribute="trailing" secondItem="7W6-9R-HFs" secondAttribute="trailing" id="sta-cT-19f"/>
+                                    <constraint firstItem="7W6-9R-HFs" firstAttribute="leading" secondItem="cKk-vA-MXL" secondAttribute="leading" id="yYl-ze-bNL"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Xj-dA-jqU" userLabel="bottom view">
@@ -177,6 +185,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="circelArrowImageView" destination="cKk-vA-MXL" id="icu-ab-aHf"/>
                         <outlet property="downloadStatusLabel" destination="NDO-EU-eCJ" id="Dwh-1K-JQS"/>
                         <outlet property="maskView" destination="er4-fP-6zP" id="kdA-o7-S1M"/>
                         <outlet property="menuContainerView" destination="DfG-0l-QeN" id="3Ei-b9-R1z"/>
@@ -712,8 +721,9 @@
     </scenes>
     <resources>
         <image name="arrow" width="16" height="14"/>
+        <image name="circleArrow" width="24" height="24"/>
+        <image name="cloud" width="24" height="24"/>
         <image name="icon02" width="20" height="18"/>
-        <image name="刷新" width="24" height="24"/>
         <image name="注册商标_淡化" width="163" height="189"/>
     </resources>
 </document>

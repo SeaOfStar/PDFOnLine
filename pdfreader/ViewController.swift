@@ -50,16 +50,34 @@ class ViewController: UIViewController, TreeTaskDelegate {
 
     }
 
+    @IBOutlet weak var circelArrowImageView: UIImageView!
     @IBOutlet weak var refreshButton: UIButton!
     @IBAction func refreshButtonAction(sender: UIButton) {
 
         sender.enabled = false
         self.downloadStatusLabel.text = "数据更新中 ..."
 
+        startRotation()
+
         let task = TreeTask()
         task.delegate = self
 
         task.fetch()
+    }
+
+    func startRotation() {
+
+        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.toValue = M_PI * -2.0
+        rotation.duration = 0.8
+        rotation.cumulative = true
+        rotation.repeatCount = .infinity
+
+        circelArrowImageView.layer.addAnimation(rotation, forKey: nil)
+    }
+
+    func stopRotation() {
+        circelArrowImageView.layer.removeAllAnimations()
     }
 
     // mark - task的回调操作
@@ -76,6 +94,9 @@ class ViewController: UIViewController, TreeTaskDelegate {
     func taskDidFinishedCache(task: TreeTask) {
         print("数据缓冲完成")
         // 发送全局通知，通知数据已经更新
+
+        stopRotation()
+
         let dateFormate = NSDateFormatter()
         dateFormate.dateFormat = "yy年MM月dd日 HH:mm"
         let timeString = dateFormate.stringFromDate(NSDate())
