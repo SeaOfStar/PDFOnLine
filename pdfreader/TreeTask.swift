@@ -108,30 +108,32 @@ class TreeTask: NSObject, NSURLSessionDelegate {
 
     }
 
-    private func downloadTaskForURL(url: NSURL) -> NSURLSessionDataTask {
-        return downloadSession.dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+    private func downloadTaskForURL(url: NSURL) -> NSURLSessionTask {
+        return downloadSession.downloadTaskWithURL(url, completionHandler: { (localURL, response, error) -> Void in
             if let httpResponse = response as? NSHTTPURLResponse {
                 if httpResponse.statusCode == 200 {
 
-                    let urlString: String! = url.description
-                    let request = NSFetchRequest(entityName: "BinaryEntity")
-                    request.predicate = NSPredicate(format: "remoteURL = %@", urlString)
-                    request.sortDescriptors = [NSSortDescriptor(key: "remoteURL", ascending: true)]
+                    if let theURLForData = localURL {
+                        let urlString: String! = url.description
+                        let request = NSFetchRequest(entityName: "BinaryEntity")
+                        request.predicate = NSPredicate(format: "remoteURL = %@", urlString)
+                        request.sortDescriptors = [NSSortDescriptor(key: "remoteURL", ascending: true)]
 
-                    do {
-                        let results = try self.context.executeFetchRequest(request)
-                        for entity in results {
-                            let bin = entity as! BinaryEntity
-                            bin.data = data
+                        do {
+                            let results = try self.context.executeFetchRequest(request)
+                            for entity in results {
+                                let bin = entity as! BinaryEntity
+                                bin.data = NSData(contentsOfURL: theURLForData)
 
-                            NSLog("保存：【%@】", urlString)
+                                NSLog("保存：【%@】", urlString)
+                            }
+
+                            ++self.downloadStaus.done
+
+                            self.saveContext()
+                        } catch {
+                            NSLog("缓冲失败：【%@】", url)
                         }
-
-                        ++self.downloadStaus.done
-
-                        self.saveContext()
-                    } catch {
-                        NSLog("缓冲失败：【%@】", url)
                     }
                 }
             }
