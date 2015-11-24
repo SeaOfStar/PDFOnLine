@@ -124,7 +124,7 @@ class ViewController: UIViewController, TreeTaskDelegate {
         let 强调效果 = [
             NSForegroundColorAttributeName: UIColor.blackColor(),
             NSBackgroundColorAttributeName: UIColor.lightGrayColor(),
-//            NSFontAttributeName: UIFont.boldSystemFontOfSize(12.0),
+            NSFontAttributeName: UIFont.boldSystemFontOfSize(downloadStatusLabel.font.pointSize),
         ]
         let 缓冲成功 = NSAttributedString(string: "缓冲成功!", attributes: 强调效果)
 
