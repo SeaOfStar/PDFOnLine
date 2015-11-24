@@ -15,7 +15,7 @@ protocol TreeTaskDelegate : NSObjectProtocol {
     func binaryDownloadStatusDidChanged(task: TreeTask)
 }
 
-class TreeTask {
+class TreeTask: NSObject, NSURLSessionDelegate {
 
     static let defaultString = "http://192.168.144.45:8080/bpm_wechat/bpmclient/getFileInfo.json"
 
@@ -25,6 +25,28 @@ class TreeTask {
 
     var urlStringsToCached = NSMutableSet()
 
+    var root: TreeEntity?
+
+    private var queue: NSOperationQueue = NSOperationQueue()
+
+    private var jsonObject: [String :AnyObject?]?
+    private var receivedData: NSData?
+
+    lazy private var downloadSession: NSURLSession = {
+        return NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate:
+            self, delegateQueue: self.queue)
+    }()
+
+    lazy var context: NSManagedObjectContext = {
+        // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
+
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let coordinator = appDelegate.persistentStoreCoordinator
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = coordinator
+        return managedObjectContext
+    }()
+
     // 下载状态标示
     var downloadStaus: (done: Int, total: Int) = (0, 0) {
         didSet {
@@ -32,12 +54,6 @@ class TreeTask {
                 self.delegate?.binaryDownloadStatusDidChanged(self)
             })
         }
-    }
-
-    init() {
-        queue = NSOperationQueue()
-        queue.name = "目录信息后台"
-        queue.maxConcurrentOperationCount = 3
     }
 
     func fetch() {
@@ -73,30 +89,13 @@ class TreeTask {
         queue.addOperation(cacheOpreation)
 
     }
-    var root: TreeEntity?
 
-    private var queue: NSOperationQueue!
-
-    private var jsonObject: [String :AnyObject?]?
-    private var receivedData: NSData?
-
-    lazy var context: NSManagedObjectContext = {
-        // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
-
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let coordinator = appDelegate.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        return managedObjectContext
-    }()
 
     func saveContext () {
 
         if self.context.hasChanges {
             do {
                 try self.context.save()
-
-                NSLog("保存数据信息")
 
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
@@ -107,6 +106,36 @@ class TreeTask {
             }
         }
 
+    }
+
+    private func downloadTaskForURL(url: NSURL) -> NSURLSessionDataTask {
+        return downloadSession.dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+            if let httpResponse = response as? NSHTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+
+                    let urlString: String! = url.description
+                    let request = NSFetchRequest(entityName: "BinaryEntity")
+                    request.predicate = NSPredicate(format: "remoteURL = %@", urlString)
+                    request.sortDescriptors = [NSSortDescriptor(key: "remoteURL", ascending: true)]
+
+                    do {
+                        let results = try self.context.executeFetchRequest(request)
+                        for entity in results {
+                            let bin = entity as! BinaryEntity
+                            bin.data = data
+
+                            NSLog("保存：【%@】", urlString)
+                        }
+
+                        ++self.downloadStaus.done
+
+                        self.saveContext()
+                    } catch {
+                        NSLog("缓冲失败：【%@】", url)
+                    }
+                }
+            }
+        })
     }
 
     private var reportOperation: NSBlockOperation {
@@ -122,65 +151,14 @@ class TreeTask {
 
         self.downloadStaus = (0, self.urlStringsToCached.count)
 
-        let report = reportOperation
-
         for urlString in urlStringsToCached {
-            let cacheOperation = NSBlockOperation(block: { () -> Void in
-                let theString = urlString as! String
-                let url = NSURL(string: theString)
-                let data = NSData(contentsOfURL: url!)
-
-                // 检索数据
-
-                let request = NSFetchRequest(entityName: "BinaryEntity")
-                request.predicate = NSPredicate(format: "remoteURL = %@", theString)
-                request.sortDescriptors = [NSSortDescriptor(key: "remoteURL", ascending: true)]
-
-                do {
-                    let results = try self.context.executeFetchRequest(request)
-
-                    for entity in results {
-                        let bin = entity as! BinaryEntity
-                        bin.data = data
-
-                        NSLog("保存：【%@】", theString)
-                    }
-
-                    ++self.downloadStaus.done
-
-                    self.saveContext()
-
-                } catch {
-                }
-
-            })
-
-            report.addDependency(cacheOperation)
-
-            self.queue.addOperation(cacheOperation)
+            let theString = urlString as! String
+            let url = NSURL(string: theString)!
+            let task = self.downloadTaskForURL(url)
+            task.resume()
         }
-
-        self.queue.addOperation(report)
-
-//        if let bins = root?.caches {
-//            let report = reportOperation
-//
-//            // 统计数据信息
-//            self.downloadStaus = (0, UInt(bins.count))
-//
-//            for entity in bins {
-//                let binEntity = entity as! BinaryEntity
-//
-////                binEntity.cacheDataInQueue(self.queue)
-//
-//                let cacheOperation = binaryDownloadOpreationForEntity(binEntity)
-//
-//                // 回报操作要依赖于所有的缓冲操作完成
-//                report.addDependency(cacheOperation)
-//                self.queue.addOperation(cacheOperation)
-//            }
-//            self.queue.addOperation(report)
-//        }
+        
+        downloadSession.finishTasksAndInvalidate()
     }
 
     private var fetchDataOpreation: NSBlockOperation {
@@ -329,5 +307,26 @@ class TreeTask {
             self.urlStringsToCached.addObject(urlString)
             return newBin
         }
+    }
+
+//    MARK: - 下载task的回调处理
+    @objc func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
+
+        NSLog("处理结束\(self.downloadStaus)")
+
+        // 进入这个函数意味着所有的task已经处理结束，而且回调也已经处理结束
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            self.delegate?.taskDidFinishedCache(self)
+        })
+    }
+
+    @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+        // 没什么要做的吧？
+        NSLog("进入challenge：【%@】", challenge)
+    }
+
+    @objc func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
+        // 不应该引入到这里
+        NSLog("进入URLSessionDidFinishEventsForBackgroundURLSession：【%@】", session)
     }
 }
