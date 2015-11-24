@@ -110,8 +110,10 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
             }
             else {
                 // 显示具体的PDF的内容
-                if let pdf = theGroup?.files?.objectAtIndex(row) as? FileEntity {
-                    self.doShowPDF(pdf)
+                if theGroup?.files?.count > row {
+                    if let pdf = theGroup?.files?.objectAtIndex(row) as? FileEntity {
+                        self.doShowPDF(pdf)
+                    }
                 }
             }
         }
