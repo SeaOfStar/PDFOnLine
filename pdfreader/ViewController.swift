@@ -97,15 +97,42 @@ class ViewController: UIViewController, TreeTaskDelegate {
 
         stopRotation()
 
-        let dateFormate = NSDateFormatter()
-        dateFormate.dateFormat = "yy年MM月dd日 HH:mm"
-        let timeString = dateFormate.stringFromDate(NSDate())
-        let info = "失败：【\(task.downloadStaus.total - task.downloadStaus.done)】最后更新时间：\(timeString)"
-        self.downloadStatusLabel.text = info
+
+
+        let 失败数量 = task.downloadStaus.total - task.downloadStaus.done
+        if 失败数量 > 0 {
+            self.downloadStatusLabel.text = "失败：【\(失败数量)】\(currentTimeString())"
+        }
+        else {
+            self.downloadStatusLabel.attributedText = successfulString()
+        }
 
         NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.menuUpdatedNotificationKey, object: self)
 
         self.refreshButton.enabled = true
+    }
+
+    func currentTimeString() -> String {
+        let dateFormate = NSDateFormatter()
+//        dateFormate.dateFormat = "  最后更新:yyyy年MM月dd日 HH:mm"
+        dateFormate.dateFormat = "  最后更新(HH:mm)"
+        return dateFormate.stringFromDate(NSDate())
+    }
+
+    func successfulString() -> NSAttributedString {
+
+        let 强调效果 = [
+            NSForegroundColorAttributeName: UIColor.blackColor(),
+            NSBackgroundColorAttributeName: UIColor.lightGrayColor(),
+//            NSFontAttributeName: UIFont.boldSystemFontOfSize(12.0),
+        ]
+        let 缓冲成功 = NSAttributedString(string: "缓冲成功!", attributes: 强调效果)
+
+        let buffer = NSMutableAttributedString()
+        buffer.appendAttributedString(缓冲成功)
+        buffer.appendAttributedString(NSMutableAttributedString(string: currentTimeString()))
+
+        return buffer
     }
 
 
