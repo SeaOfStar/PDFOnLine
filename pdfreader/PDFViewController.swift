@@ -13,8 +13,6 @@ protocol PDFViewControllerDelegate: NSObjectProtocol {
     func didSwipeDownAtController(pdfController: PDFViewController)
     func didSwipeUpAtController(pdfController: PDFViewController)
 
-//    func didChangePDFFile(pdfController: PDFViewController)
-
     // 文章变换
     func reachEndOfPDFInController(controller: PDFViewController)
     func reachTopOfPDFInController(controller: PDFViewController)
@@ -30,6 +28,7 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
     @IBOutlet weak var lineView: UIView!
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var pageInfoLabel: UILabel!
 
     var pdf: FileEntity? {
         didSet {
@@ -40,6 +39,9 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
                 if let data = theData.data?.data {
                     PDFReader.data = data
+
+                    // 更新页数信息
+                    updatePageInfo()
                 }
             }
         }
@@ -66,6 +68,15 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func didPageChangedInPDFView(view: PDFReaderView) {
+        updatePageInfo()
+    }
+
+    // 更新页数信息
+    func updatePageInfo() {
+        pageInfoLabel.text = "\(PDFReader.index + 1) / \(PDFReader.pageCount)页"
     }
 
 

@@ -11,6 +11,8 @@ import UIKit
 protocol PDFReaderViewDelegate: NSObjectProtocol {
     func didReachEndOfPDFView(view :PDFReaderView)
     func didReachTopOfPDFView(view :PDFReaderView)
+    func didPageChangedInPDFView(view: PDFReaderView)
+
 }
 
 
@@ -94,6 +96,8 @@ class PDFReaderView: UIView {
             showAnimation.delegate = self
             showAnimation.duration = 0.4
             page.addAnimation(showAnimation, forKey: "显示")
+
+            self.delegate?.didPageChangedInPDFView(self)
         }
     }
 

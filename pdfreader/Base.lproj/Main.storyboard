@@ -449,11 +449,20 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fih-qX-6qp">
+                                        <rect key="frame" x="559" y="18.5" width="33" height="16"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="fih-qX-6qp" firstAttribute="centerY" secondItem="ziV-rA-KZK" secondAttribute="centerY" id="0Yb-ao-bE1"/>
                                     <constraint firstItem="Poe-rz-VOe" firstAttribute="leading" secondItem="ziV-rA-KZK" secondAttribute="leading" id="4E2-Lj-o2E"/>
+                                    <constraint firstAttribute="trailing" secondItem="fih-qX-6qp" secondAttribute="trailing" constant="8" id="4mO-Kw-qjC"/>
                                     <constraint firstAttribute="trailing" secondItem="Poe-rz-VOe" secondAttribute="trailing" id="D0Q-Sl-eA1"/>
                                     <constraint firstAttribute="height" constant="54" id="EiK-ah-60T"/>
                                     <constraint firstItem="JMX-CM-t1d" firstAttribute="leading" secondItem="ziV-rA-KZK" secondAttribute="leading" constant="32" id="bWM-AQ-9hq"/>
@@ -482,6 +491,7 @@
                     <connections>
                         <outlet property="PDFReader" destination="H6I-Ix-Ufb" id="VLJ-SI-AD0"/>
                         <outlet property="lineView" destination="Poe-rz-VOe" id="DdP-Lr-yjQ"/>
+                        <outlet property="pageInfoLabel" destination="fih-qX-6qp" id="Vop-Xk-cVM"/>
                         <outlet property="titleLabel" destination="JMX-CM-t1d" id="TLw-mf-430"/>
                     </connections>
                 </viewController>
