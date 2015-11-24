@@ -76,7 +76,10 @@ class ViewController: UIViewController, TreeTaskDelegate {
     func taskDidFinishedCache(task: TreeTask) {
         print("数据缓冲完成")
         // 发送全局通知，通知数据已经更新
-        let info = "共计：\(task.downloadStaus.total)，失败：\(task.downloadStaus.total - task.downloadStaus.done)"
+        let dateFormate = NSDateFormatter()
+        dateFormate.dateFormat = "yy年MM月dd日 HH:mm"
+        let timeString = dateFormate.stringFromDate(NSDate())
+        let info = "失败：【\(task.downloadStaus.total - task.downloadStaus.done)】最后更新时间：\(timeString)"
         self.downloadStatusLabel.text = info
 
         NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.menuUpdatedNotificationKey, object: self)

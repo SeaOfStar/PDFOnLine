@@ -18,7 +18,6 @@ protocol TreeTaskDelegate : NSObjectProtocol {
 class TreeTask: NSObject, NSURLSessionDelegate {
 
     static let defaultString = "http://192.168.144.45:8080/bpm_wechat/bpmclient/getFileInfo.json"
-
     let serverURL: NSURL = NSURL(string: TreeTask.defaultString)!
 
     weak var delegate: TreeTaskDelegate?
