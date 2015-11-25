@@ -17,6 +17,8 @@ protocol TreeTaskDelegate : NSObjectProtocol {
 
 class TreeTask: NSObject, NSURLSessionDelegate {
 
+    let 最大同时下载数量 = 5
+
 //    static let defaultString = "http://192.168.144.45:8080/bpm_wechat/bpmclient/getFileInfo.json"
     static let defaultString = "http://112.124.23.78:18080/bpm_wechat/bpmclient/getFileInfo.json"
     let serverURL: NSURL = NSURL(string: TreeTask.defaultString)!
@@ -107,7 +109,7 @@ class TreeTask: NSObject, NSURLSessionDelegate {
 
     }
 
-    private func downloadTaskForURL(url: NSURL) -> NSURLSessionTask {
+    private func downloadTaskForURL(url: NSURL) -> NSURLSessionDownloadTask {
         return downloadSession.downloadTaskWithURL(url, completionHandler: { (localURL, response, error) -> Void in
             if let httpResponse = response as? NSHTTPURLResponse {
                 if httpResponse.statusCode == 200 {
@@ -136,6 +138,9 @@ class TreeTask: NSObject, NSURLSessionDelegate {
                     }
                 }
             }
+
+            // 继续下载下一个
+            self.cacheSingleURL()
         })
     }
 
@@ -144,14 +149,33 @@ class TreeTask: NSObject, NSURLSessionDelegate {
 
         self.downloadStaus = (0, self.urlStringsToCached.count)
 
-        for urlString in urlStringsToCached {
-            let theString = urlString as! String
-            let url = NSURL(string: theString)!
+        /* 
+        这里之所以要这么麻烦，主要是因为如果同时下载太多的数据会造成带宽不足而导致大量的下载失败
+        控制同时下载的数据的数量来减少下载失败的情况
+        */
+
+        for _ in 1 ... 最大同时下载数量 {
+            cacheSingleURL()
+        }
+    }
+
+    // 返回剩余的url数量
+    private func cacheSingleURL() -> Int  {
+        if let urlString = urlStringsToCached.anyObject() {
+            let url = NSURL(string: urlString as! String)!
             let task = self.downloadTaskForURL(url)
             task.resume()
+            // 将对应的url从整体中移除
+            urlStringsToCached.removeObject(urlString)
         }
-        
-        downloadSession.finishTasksAndInvalidate()
+
+        // 检查是否还有数据没有下载过
+        let remainCount = urlStringsToCached.count
+        if remainCount <= 0 {
+            self.downloadSession.finishTasksAndInvalidate()
+        }
+
+        return remainCount
     }
 
     private var fetchDataOpreation: NSBlockOperation {
@@ -274,7 +298,8 @@ class TreeTask: NSObject, NSURLSessionDelegate {
     }
 
 //    MARK: - 下载task的回调处理
-    @objc func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
+    // MARK: 全体任务数据结束
+    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
 
         NSLog("处理结束\(self.downloadStaus)")
 
@@ -284,7 +309,7 @@ class TreeTask: NSObject, NSURLSessionDelegate {
         })
     }
 
-    @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         // 没什么要做的吧？
         NSLog("进入challenge：【%@】", challenge)
     }
