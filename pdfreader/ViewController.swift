@@ -50,8 +50,14 @@ class ViewController: UIViewController, TreeTaskDelegate {
 
     }
 
+    let 显示进度条距离:CGFloat = 20.0
+    let 隐藏进度条距离:CGFloat = -180.0
+
+    @IBOutlet weak var progessBarRightDistance: NSLayoutConstraint!
+    @IBOutlet weak var progessBar: UIProgressView!
     @IBOutlet weak var circelArrowImageView: UIImageView!
     @IBOutlet weak var refreshButton: UIButton!
+
     @IBAction func refreshButtonAction(sender: UIButton) {
 
         sender.enabled = false
@@ -65,6 +71,7 @@ class ViewController: UIViewController, TreeTaskDelegate {
         task.fetch()
     }
 
+
     func startRotation() {
 
         let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
@@ -74,10 +81,24 @@ class ViewController: UIViewController, TreeTaskDelegate {
         rotation.repeatCount = .infinity
 
         circelArrowImageView.layer.addAnimation(rotation, forKey: nil)
+
+        // 显示进度条
+        UIView.animateWithDuration(0.4) { () -> Void in
+            self.progessBarRightDistance.constant = self.显示进度条距离
+            self.view.layoutIfNeeded()
+        }
+
+        progessBar.setProgress(0.0, animated: true)
     }
 
     func stopRotation() {
         circelArrowImageView.layer.removeAllAnimations()
+
+        // 显示进度条
+        UIView.animateWithDuration(0.4) { () -> Void in
+            self.progessBarRightDistance.constant = self.隐藏进度条距离
+            self.view.layoutIfNeeded()
+        }
     }
 
     // mark - task的回调操作
@@ -89,6 +110,14 @@ class ViewController: UIViewController, TreeTaskDelegate {
     func binaryDownloadStatusDidChanged(task: TreeTask) {
         let info = "\(task.downloadStaus.done) / \(task.downloadStaus.total)"
         self.downloadStatusLabel.text = info
+
+        if task.downloadStaus.total > 0 {
+            let value = Float(task.downloadStaus.done) / Float(task.downloadStaus.total)
+            self.progessBar.setProgress(value, animated: true)
+        }
+        else {
+            self.progessBar.setProgress(0.0, animated: true)
+        }
     }
 
     func taskDidFinishedCache(task: TreeTask) {
@@ -96,8 +125,6 @@ class ViewController: UIViewController, TreeTaskDelegate {
         // 发送全局通知，通知数据已经更新
 
         stopRotation()
-
-
 
         let 失败数量 = task.downloadStaus.total - task.downloadStaus.done
         if 失败数量 > 0 {

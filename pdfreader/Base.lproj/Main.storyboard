@@ -98,7 +98,7 @@
                                 <rect key="frame" x="0.0" y="570" width="600" height="30"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="©2013 大连华信计算机技术股份有限公司 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmJ-r4-llO">
-                                        <rect key="frame" x="20" y="0.0" width="560" height="30"/>
+                                        <rect key="frame" x="20" y="0.0" width="225" height="30"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="T0A-Kb-sxc"/>
@@ -107,23 +107,42 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-EU-eCJ">
-                                        <rect key="frame" x="592" y="15" width="0.0" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="专业、诚信、责任感" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-EU-eCJ">
+                                        <rect key="frame" x="493" y="8" width="99" height="13.5"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CFu-h1-vNy">
+                                        <rect key="frame" x="600" y="0.0" width="180" height="30"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jtd-No-eYv">
+                                                <rect key="frame" x="0.0" y="14" width="180" height="2"/>
+                                                <animations/>
+                                            </progressView>
+                                        </subviews>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="0lj-MW-S5J"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jtd-No-eYv" secondAttribute="trailing" id="5kt-bB-l2O"/>
+                                            <constraint firstItem="Jtd-No-eYv" firstAttribute="centerY" secondItem="CFu-h1-vNy" secondAttribute="centerY" id="IyI-Zm-7Rd"/>
+                                            <constraint firstItem="Jtd-No-eYv" firstAttribute="leading" secondItem="CFu-h1-vNy" secondAttribute="leading" id="i9H-ke-BXb"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="NDO-EU-eCJ" firstAttribute="centerY" secondItem="2Xj-dA-jqU" secondAttribute="centerY" id="3MN-p4-TSp"/>
-                                    <constraint firstAttribute="trailing" secondItem="wmJ-r4-llO" secondAttribute="trailing" constant="20" symbolic="YES" id="3oq-OJ-cBA"/>
-                                    <constraint firstAttribute="trailing" secondItem="NDO-EU-eCJ" secondAttribute="trailing" constant="8" id="7it-Uo-Rff"/>
+                                    <constraint firstItem="CFu-h1-vNy" firstAttribute="top" secondItem="2Xj-dA-jqU" secondAttribute="top" id="DxK-pk-K39"/>
+                                    <constraint firstAttribute="trailing" secondItem="CFu-h1-vNy" secondAttribute="trailing" constant="-180" id="FGq-mV-dGd"/>
                                     <constraint firstItem="wmJ-r4-llO" firstAttribute="bottom" secondItem="2Xj-dA-jqU" secondAttribute="bottom" id="dY8-09-yhN"/>
                                     <constraint firstAttribute="height" constant="30" id="jzv-pi-8Ig"/>
+                                    <constraint firstItem="CFu-h1-vNy" firstAttribute="leading" secondItem="NDO-EU-eCJ" secondAttribute="trailing" constant="8" id="kZp-T9-0dR"/>
                                     <constraint firstItem="wmJ-r4-llO" firstAttribute="leading" secondItem="2Xj-dA-jqU" secondAttribute="leading" constant="20" symbolic="YES" id="lrl-p0-cK7"/>
+                                    <constraint firstAttribute="bottom" secondItem="CFu-h1-vNy" secondAttribute="bottom" id="pQR-Az-h6C"/>
                                 </constraints>
                             </view>
                             <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="er4-fP-6zP">
@@ -190,6 +209,8 @@
                         <outlet property="maskView" destination="er4-fP-6zP" id="kdA-o7-S1M"/>
                         <outlet property="menuContainerView" destination="DfG-0l-QeN" id="3Ei-b9-R1z"/>
                         <outlet property="menuLeftEdge" destination="tQo-HR-moS" id="EKw-bX-MzE"/>
+                        <outlet property="progessBar" destination="Jtd-No-eYv" id="iAA-Hx-gJ8"/>
+                        <outlet property="progessBarRightDistance" destination="FGq-mV-dGd" id="feF-dq-Y5p"/>
                         <outlet property="refreshButton" destination="7W6-9R-HFs" id="Qm1-a1-Npx"/>
                     </connections>
                 </viewController>
