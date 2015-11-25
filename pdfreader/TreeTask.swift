@@ -102,7 +102,6 @@ class TreeTask: NSObject, NSURLSessionDelegate {
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
             }
         }
 
@@ -137,14 +136,6 @@ class TreeTask: NSObject, NSURLSessionDelegate {
                     }
                 }
             }
-        })
-    }
-
-    private var reportOperation: NSBlockOperation {
-        return NSBlockOperation(block: { () -> Void in
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                self.delegate?.taskDidFinishedCache(self)
-            })
         })
     }
 
@@ -230,35 +221,6 @@ class TreeTask: NSObject, NSURLSessionDelegate {
                         newFile.data = data
                         return newFile
                     })
-                }
-            }
-        })
-    }
-
-    private func binaryDownloadOpreationForEntity(bin: BinaryEntity) ->NSBlockOperation {
-        return NSBlockOperation(block: { () -> Void in
-            if let _ = bin.data {
-                // 已经存在缓冲数据
-                self.downloadStaus = (self.downloadStaus.done + 1, self.downloadStaus.total)
-                return
-            }
-
-            if let url = NSURL(string: bin.remoteURL!) {
-
-                if let data = NSData(contentsOfURL: url) {
-                    bin.data = data
-
-//                    print("下载完成：\(bin.remoteURL)")
-
-                    do {
-                        try self.context.save()
-                        self.downloadStaus = (self.downloadStaus.done + 1, self.downloadStaus.total)
-                        print("下载：【\(self.downloadStaus)】-> \(bin.remoteURL)")
-                    } catch {
-                        NSLog("保存数据出错：\(bin.remoteURL)")
-                        let nserror = error as NSError
-                        NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                    }
                 }
             }
         })
