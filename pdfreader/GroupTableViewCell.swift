@@ -32,6 +32,16 @@ class GroupTableViewCell: UITableViewCell {
 
         arrowBackground.layer.cornerRadius = 5
         arrowBackground.layer.masksToBounds = true
+
+        // 阴影效果和白边
+        let iconLayer = iconView.layer
+        iconLayer.shadowColor = UIColor.blackColor().CGColor
+        iconLayer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        iconLayer.shadowRadius = 2.0
+        iconLayer.shadowOpacity = 0.4
+
+        iconLayer.borderColor = UIColor.whiteColor().CGColor
+        iconLayer.borderWidth = 3.0
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
