@@ -13,6 +13,8 @@
 		F8160AE11BF9A6080077898B /* GroupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160ADB1BF9A6080077898B /* GroupEntity.swift */; };
 		F8160AE21BF9A6080077898B /* FileEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160ADC1BF9A6080077898B /* FileEntity+CoreDataProperties.swift */; };
 		F8160AE31BF9A6080077898B /* FileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8160ADD1BF9A6080077898B /* FileEntity.swift */; };
+		F819A4661C09804C0096E57F /* DrawableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F819A4651C09804C0096E57F /* DrawableView.swift */; };
+		F819A4681C0986F60096E57F /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F819A4671C0986F60096E57F /* LineViewController.swift */; };
 		F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */; };
 		F8227E421BF575FB00A8F7A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8227E411BF575FB00A8F7A5 /* ViewController.swift */; };
 		F8227E451BF575FB00A8F7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8227E431BF575FB00A8F7A5 /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 		F8160ADB1BF9A6080077898B /* GroupEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupEntity.swift; sourceTree = "<group>"; };
 		F8160ADC1BF9A6080077898B /* FileEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F8160ADD1BF9A6080077898B /* FileEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileEntity.swift; sourceTree = "<group>"; };
+		F819A4651C09804C0096E57F /* DrawableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawableView.swift; sourceTree = "<group>"; };
+		F819A4671C0986F60096E57F /* LineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		F8227E3C1BF575FB00A8F7A5 /* pdfreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pdfreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8227E3F1BF575FB00A8F7A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8227E411BF575FB00A8F7A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +101,15 @@
 			name = "数据管理";
 			sourceTree = "<group>";
 		};
+		F819A4641C097EBA0096E57F /* 线条描绘 */ = {
+			isa = PBXGroup;
+			children = (
+				F819A4651C09804C0096E57F /* DrawableView.swift */,
+				F819A4671C0986F60096E57F /* LineViewController.swift */,
+			);
+			name = "线条描绘";
+			sourceTree = "<group>";
+		};
 		F8227E331BF575FB00A8F7A5 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +147,7 @@
 		F8227E561BF5942200A8F7A5 /* 内容 */ = {
 			isa = PBXGroup;
 			children = (
+				F819A4641C097EBA0096E57F /* 线条描绘 */,
 				F8D1C5371BFD60E100D4C3D5 /* 显示分组的详细内容 */,
 				F899CDD31BF5BC6B006E96B1 /* PDf读取 */,
 				F8227E541BF58FE100A8F7A5 /* ContentProviderViewController.swift */,
@@ -265,8 +279,10 @@
 				F88D95CA1BFAC7F6000FA050 /* BinaryEntity.swift in Sources */,
 				F8227E481BF575FB00A8F7A5 /* pdfreader.xcdatamodeld in Sources */,
 				F8D1C5361BFC225800D4C3D5 /* TreeTask.swift in Sources */,
+				F819A4661C09804C0096E57F /* DrawableView.swift in Sources */,
 				F8227E401BF575FB00A8F7A5 /* AppDelegate.swift in Sources */,
 				F8160AE21BF9A6080077898B /* FileEntity+CoreDataProperties.swift in Sources */,
+				F819A4681C0986F60096E57F /* LineViewController.swift in Sources */,
 				F8D1C5391BFD615700D4C3D5 /* GroupFrameworkViewController.swift in Sources */,
 				F8160ADF1BF9A6080077898B /* TreeEntity.swift in Sources */,
 				F899CDDA1BF5C828006E96B1 /* PDFViewController.swift in Sources */,

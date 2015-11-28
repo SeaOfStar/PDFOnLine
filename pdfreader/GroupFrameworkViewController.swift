@@ -42,7 +42,6 @@ class GroupFrameworkViewController: UIViewController, GroupListViewControllerDel
         // Do any additional setup after loading the view.
 
         // 在自己的页面上添加左右滑动的手势
-
         configGestureRecognizer()
 
     }

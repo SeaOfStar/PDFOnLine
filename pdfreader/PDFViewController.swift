@@ -19,7 +19,7 @@ protocol PDFViewControllerDelegate: NSObjectProtocol {
 }
 
 
-class PDFViewController: UIViewController, PDFReaderViewDelegate {
+class PDFViewController: UIViewController, PDFReaderViewDelegate, LineViewControllerDelegate {
 
     weak var delegate: PDFViewControllerDelegate?
 
@@ -29,6 +29,8 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pageInfoLabel: UILabel!
+
+    @IBOutlet weak var drawView: UIView!
 
     var pdf: FileEntity? {
         didSet {
@@ -63,6 +65,10 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: Selector("swipeUpAction:"))
         swipeUp.direction = .Up
         view.addGestureRecognizer(swipeUp)
+
+        // 添加双击手势用于即时描绘
+        let longPress = UILongPressGestureRecognizer(target: self, action: Selector("longPressAction:"))
+        view.addGestureRecognizer(longPress)
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,14 +103,25 @@ class PDFViewController: UIViewController, PDFReaderViewDelegate {
     }
 
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "画线" {
+            let lineController = segue.destinationViewController as! LineViewController
+            lineController.delegate = self
+        }
     }
-    */
+
+    // 在画线页面上点击关闭按钮
+    func didClickCloseButtonOnLineController(lineController: LineViewController) {
+        drawView.hidden = true
+    }
+
+    func longPressAction(recognizer: UIGestureRecognizer) {
+        drawView.hidden = false
+    }
 
 }

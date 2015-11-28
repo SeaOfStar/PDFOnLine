@@ -471,7 +471,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fih-qX-6qp">
-                                        <rect key="frame" x="559" y="18.5" width="33" height="16"/>
+                                        <rect key="frame" x="559" y="19" width="33" height="16"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -496,22 +496,35 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Nn-Uq-8iL">
+                                <rect key="frame" x="0.0" y="54" width="600" height="451"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="kLJ-FR-cCh" kind="embed" identifier="画线" id="ZrV-0u-tlo"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ziV-rA-KZK" firstAttribute="top" secondItem="61m-Xo-Dk3" secondAttribute="bottom" id="Dbe-cU-yXM"/>
+                            <constraint firstItem="H6I-Ix-Ufb" firstAttribute="bottom" secondItem="5Nn-Uq-8iL" secondAttribute="bottom" id="F6O-3p-gzl"/>
                             <constraint firstItem="ziV-rA-KZK" firstAttribute="leading" secondItem="vfD-WF-xtA" secondAttribute="leading" id="LVa-x3-f0w"/>
                             <constraint firstItem="H6I-Ix-Ufb" firstAttribute="leading" secondItem="vfD-WF-xtA" secondAttribute="leading" id="RVj-XK-lwX"/>
                             <constraint firstAttribute="trailing" secondItem="ziV-rA-KZK" secondAttribute="trailing" id="eEN-l7-SGP"/>
                             <constraint firstItem="EFs-gc-v9J" firstAttribute="top" secondItem="H6I-Ix-Ufb" secondAttribute="bottom" id="f6e-ER-qgg"/>
+                            <constraint firstItem="H6I-Ix-Ufb" firstAttribute="trailing" secondItem="5Nn-Uq-8iL" secondAttribute="trailing" id="iHE-dd-ale"/>
                             <constraint firstAttribute="trailing" secondItem="H6I-Ix-Ufb" secondAttribute="trailing" id="jlU-Ka-jx8"/>
+                            <constraint firstItem="H6I-Ix-Ufb" firstAttribute="top" secondItem="5Nn-Uq-8iL" secondAttribute="top" id="lRs-bD-iEo"/>
+                            <constraint firstItem="H6I-Ix-Ufb" firstAttribute="leading" secondItem="5Nn-Uq-8iL" secondAttribute="leading" id="uqs-Gh-AEf"/>
                             <constraint firstItem="H6I-Ix-Ufb" firstAttribute="top" secondItem="ziV-rA-KZK" secondAttribute="bottom" id="xYT-If-nox"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="PDFReader" destination="H6I-Ix-Ufb" id="VLJ-SI-AD0"/>
-                        <outlet property="lineView" destination="Poe-rz-VOe" id="DdP-Lr-yjQ"/>
+                        <outlet property="drawView" destination="5Nn-Uq-8iL" id="PTA-tx-sa5"/>
+                        <outlet property="lineView" destination="Poe-rz-VOe" id="oRb-Eg-pgv"/>
                         <outlet property="pageInfoLabel" destination="fih-qX-6qp" id="Vop-Xk-cVM"/>
                         <outlet property="titleLabel" destination="JMX-CM-t1d" id="TLw-mf-430"/>
                     </connections>
@@ -749,12 +762,64 @@
             </objects>
             <point key="canvasLocation" x="2350.5" y="650.5"/>
         </scene>
+        <!--Line View Controller-->
+        <scene sceneID="Yt4-wA-z21">
+            <objects>
+                <viewController id="kLJ-FR-cCh" customClass="LineViewController" customModule="pdfreader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HVg-LW-MWE" customClass="DrawableView" customModule="pdfreader" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="451"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgG-pb-POH">
+                                <rect key="frame" x="545" y="396" width="35" height="35"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="eNH-J9-pFa"/>
+                                    <constraint firstAttribute="width" constant="35" id="vIV-2L-6YU"/>
+                                </constraints>
+                                <state key="normal" image="关闭"/>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="kLJ-FR-cCh" eventType="touchUpInside" id="Veb-Yv-G62"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3e-Oe-3nQ">
+                                <rect key="frame" x="542.5" y="336" width="40" height="40"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kkS-vo-rIF"/>
+                                    <constraint firstAttribute="width" constant="40" id="suX-8G-No4"/>
+                                </constraints>
+                                <state key="normal" image="清除"/>
+                                <connections>
+                                    <action selector="clearButtonAction:" destination="kLJ-FR-cCh" eventType="touchUpInside" id="73g-e9-xiB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FgG-pb-POH" firstAttribute="centerX" secondItem="f3e-Oe-3nQ" secondAttribute="centerX" id="85h-A3-Kqc"/>
+                            <constraint firstAttribute="bottom" secondItem="FgG-pb-POH" secondAttribute="bottom" constant="20" id="Szc-bt-4eK"/>
+                            <constraint firstItem="FgG-pb-POH" firstAttribute="top" secondItem="f3e-Oe-3nQ" secondAttribute="bottom" constant="20" id="md8-eM-89c"/>
+                            <constraint firstAttribute="trailing" secondItem="FgG-pb-POH" secondAttribute="trailing" constant="20" id="wa7-F9-gYz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="drawView" destination="HVg-LW-MWE" id="cHk-AT-jcf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xIc-JX-Ckv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2447" y="34.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow" width="16" height="14"/>
         <image name="circleArrow" width="24" height="24"/>
         <image name="cloud" width="24" height="24"/>
         <image name="icon02" width="20" height="18"/>
+        <image name="关闭" width="85" height="85"/>
         <image name="注册商标_淡化" width="163" height="189"/>
+        <image name="清除" width="85" height="85"/>
     </resources>
 </document>
