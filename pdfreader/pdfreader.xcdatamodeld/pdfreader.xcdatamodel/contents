@@ -8,6 +8,7 @@
     </entity>
     <entity name="FileEntity" representedClassName=".FileEntity" syncable="YES">
         <attribute name="fileID" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="fileTypeString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="introduce" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,7 +34,7 @@
     </entity>
     <elements>
         <element name="BinaryEntity" positionX="-54" positionY="90" width="128" height="105"/>
-        <element name="FileEntity" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="FileEntity" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="GroupEntity" positionX="-54" positionY="54" width="128" height="180"/>
         <element name="TreeEntity" positionX="-36" positionY="63" width="128" height="90"/>
     </elements>

@@ -12,13 +12,27 @@ import CoreData
 
 class FileEntity: NSManagedObject {
 
+    enum FileType: String {
+        case PDF = "pdf"
+        case Video = "video"
+        case Unknown = ""
+    }
+
 // Insert code here to add functionality to your managed object subclass
+
+    var fileType: FileType? = .Unknown
 
     func configWithDictionary(dataSource: [String: AnyObject]) {
         self.fileID = dataSource["fileid"] as? String
         self.name = dataSource["filename"] as? String
         self.introduce = dataSource["filemessage"] as? String
         self.tag = dataSource["filetag"] as? String
+        self.fileTypeString = dataSource["filetype"] as? String
+        if let typeString = fileTypeString {
+            self.fileType = FileType(rawValue: typeString)
+        }
+
+        NSLog("string：\(fileTypeString), value: \(fileType)")
     }
 
     private var sortedAllFiles: [FileEntity] {

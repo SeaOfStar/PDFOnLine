@@ -2,7 +2,7 @@
 //  FileEntity+CoreDataProperties.swift
 //  pdfreader
 //
-//  Created by 吴向东 on 15/11/23.
+//  Created by 吴向东 on 15/12/9.
 //  Copyright © 2015年 MIBD. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,6 +18,7 @@ extension FileEntity {
     @NSManaged var introduce: String?
     @NSManaged var name: String?
     @NSManaged var tag: String?
+    @NSManaged var fileTypeString: String?
     @NSManaged var data: BinaryEntity?
     @NSManaged var icon: BinaryEntity?
     @NSManaged var ownerGroup: GroupEntity?
