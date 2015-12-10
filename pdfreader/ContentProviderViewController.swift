@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import AVFoundation
+import AVKit
 
 class ContentProviderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GroupFrameworkViewControllerDelegate, PDFViewControllerDelegate {
 
@@ -111,12 +113,38 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
             else {
                 // 显示具体的PDF的内容
                 if theGroup?.files?.count > row {
-                    if let pdf = theGroup?.files?.objectAtIndex(row) as? FileEntity {
-                        self.doShowPDF(pdf)
+                    if let file = theGroup?.files?.objectAtIndex(row) as? FileEntity {
+                        // 根据文件的类型决定是播放视频还是现实PDF
+                        if let type = file.fileType {
+                            switch type {
+                            case .PDF:
+                                self.doShowPDF(file)
+
+                            case .Video:
+                                // 如果是从目录跳转过来的，还需要切换到分组页的相应位置
+                                self.doShowVideo(file)
+
+                            default:
+                                break
+                            }
+                        }
                     }
                 }
             }
         }
+    }
+
+    func doShowVideo(file: FileEntity) {
+        let player = AVPlayer(URL: NSURL(string: "http://192.168.144.32:8080/bpm_manager/uploadfile/527110e2fa5546c1890df9369ef036ba.mp4")!)
+        let controller = AVPlayerViewController()
+        controller.player = player
+
+        presentViewController(controller, animated: true, completion: { () -> Void in
+
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                player.play()
+            })
+        })
     }
 
     func doShowPDF(file: FileEntity) {

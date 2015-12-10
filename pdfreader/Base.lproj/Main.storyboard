@@ -766,6 +766,10 @@
         <scene sceneID="Yt4-wA-z21">
             <objects>
                 <viewController id="kLJ-FR-cCh" customClass="LineViewController" customModule="pdfreader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mJL-dl-8K4"/>
+                        <viewControllerLayoutGuide type="bottom" id="oM4-h8-cOr"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HVg-LW-MWE" customClass="DrawableView" customModule="pdfreader" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="451"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

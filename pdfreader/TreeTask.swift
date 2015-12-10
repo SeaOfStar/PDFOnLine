@@ -192,7 +192,7 @@ class TreeTask: NSObject, NSURLSessionDelegate {
                 do {
                     let jsonObj = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions())
                     if let receivedResult = jsonObj["result"] {
-                        self.jsonObject = receivedResult as! [String:AnyObject]
+                        self.jsonObject = receivedResult as? [String:AnyObject]
                     }
 
                 } catch {}

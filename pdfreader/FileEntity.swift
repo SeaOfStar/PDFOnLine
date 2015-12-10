@@ -22,6 +22,14 @@ class FileEntity: NSManagedObject {
 
     var fileType: FileType? = .Unknown
 
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+
+        if let typeString = fileTypeString {
+            self.fileType = FileType(rawValue: typeString)
+        }
+    }
+
     func configWithDictionary(dataSource: [String: AnyObject]) {
         self.fileID = dataSource["fileid"] as? String
         self.name = dataSource["filename"] as? String
@@ -31,8 +39,6 @@ class FileEntity: NSManagedObject {
         if let typeString = fileTypeString {
             self.fileType = FileType(rawValue: typeString)
         }
-
-        NSLog("string：\(fileTypeString), value: \(fileType)")
     }
 
     private var sortedAllFiles: [FileEntity] {
