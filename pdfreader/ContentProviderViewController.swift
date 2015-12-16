@@ -125,6 +125,7 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
                                 self.doShowVideo(file)
 
                             default:
+                                self.doShowPDF(file)
                                 break
                             }
                         }
@@ -135,16 +136,20 @@ class ContentProviderViewController: UIViewController, UICollectionViewDataSourc
     }
 
     func doShowVideo(file: FileEntity) {
-        let player = AVPlayer(URL: NSURL(string: "http://192.168.144.32:8080/bpm_manager/uploadfile/527110e2fa5546c1890df9369ef036ba.mp4")!)
-        let controller = AVPlayerViewController()
-        controller.player = player
+        if let local = file.data?.fullURL {
 
-        presentViewController(controller, animated: true, completion: { () -> Void in
+            NSLog("播放：\(local)")
+            let player = AVPlayer(URL: local)
+            let controller = AVPlayerViewController()
+            controller.player = player
 
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                player.play()
+            presentViewController(controller, animated: true, completion: { () -> Void in
+
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    player.play()
+                })
             })
-        })
+        }
     }
 
     func doShowPDF(file: FileEntity) {

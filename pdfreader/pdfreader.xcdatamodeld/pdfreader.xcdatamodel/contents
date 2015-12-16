@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
     <entity name="BinaryEntity" representedClassName=".BinaryEntity" syncable="YES">
-        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="localURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteURL" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="filesData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FileEntity" inverseName="data" inverseEntity="FileEntity" syncable="YES"/>
         <relationship name="filesIcon" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FileEntity" inverseName="icon" inverseEntity="FileEntity" syncable="YES"/>

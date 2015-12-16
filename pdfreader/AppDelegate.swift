@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        checkAndMakeBufferDirectionary()
         return true
     }
 
@@ -108,5 +110,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+
+
+    private func checkAndMakeBufferDirectionary() {
+        let manager = NSFileManager.defaultManager()
+
+        let dictionary = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
+        let pathURL = dictionary!.URLByAppendingPathComponent(BinaryEntity.subpathName, isDirectory: true)
+
+        // 判断目录是否存在
+        // 创建相应的目录
+        do {
+            try manager.createDirectoryAtURL(pathURL, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            NSLog("创建目录失败：【\(pathURL)】")
+        }
+
+    }
+
 }
 

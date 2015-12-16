@@ -19,7 +19,7 @@ class TreeTask: NSObject, NSURLSessionDelegate {
 
     let 最大同时下载数量 = 5
 
-    static let defaultString = "http://192.168.144.32:8080/bpm_wechat/bpmclient/getFileInfo.json"
+    static let defaultString = "http://192.168.144.44:8080/bpm_wechat/bpmclient/getFileInfo.json"
 //    static let defaultString = "http://112.124.23.78:18080/bpm_wechat/bpmclient/getFileInfo.json"
     let serverURL: NSURL = NSURL(string: TreeTask.defaultString)!
 
@@ -124,7 +124,8 @@ class TreeTask: NSObject, NSURLSessionDelegate {
                             let results = try self.context.executeFetchRequest(request)
                             for entity in results {
                                 let bin = entity as! BinaryEntity
-                                bin.data = NSData(contentsOfURL: theURLForData)
+//                                bin.data = NSData(contentsOfURL: theURLForData)
+                                bin.saveToLocalFile(theURLForData)
 
                                 NSLog("保存：【%@】", urlString)
                             }
