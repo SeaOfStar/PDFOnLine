@@ -58,6 +58,15 @@ class TreeTask: NSObject, NSURLSessionDelegate {
         }
     }
 
+    var token :dispatch_once_t = 0
+
+    func addDoneCountForDownloadStatus() {
+
+        dispatch_once(&token, { () -> Void in
+            ++self.downloadStaus.done
+        })
+    }
+
     func fetch() {
 
         let fetchOpreation = fetchDataOpreation
@@ -127,10 +136,10 @@ class TreeTask: NSObject, NSURLSessionDelegate {
 //                                bin.data = NSData(contentsOfURL: theURLForData)
                                 bin.saveToLocalFile(theURLForData)
 
-                                NSLog("保存：【%@】", urlString)
+//                                NSLog("保存：【%@】", urlString)
                             }
 
-                            ++self.downloadStaus.done
+                            self.addDoneCountForDownloadStatus()
 
                             self.saveContext()
                         } catch {
@@ -281,7 +290,7 @@ class TreeTask: NSObject, NSURLSessionDelegate {
 
     private func fetchOrCreateBinaryEntityForURL(urlString: String) -> BinaryEntity! {
         if let old = binaryForURL(urlString) {
-            if old.data == nil {
+            if !old.isCached {
                 if let remoteURL = old.remoteURL {
                     self.urlStringsToCached.addObject(remoteURL)
                 }

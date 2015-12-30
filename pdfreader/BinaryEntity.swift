@@ -15,6 +15,15 @@ class BinaryEntity: NSManagedObject {
 
     static let subpathName = "videoCache"
 
+    var isCached: Bool {
+        if let _ = localURL {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
     var fullURL: NSURL? {
         if let urlString = localURL {
             return BinaryEntity.cachePath.URLByAppendingPathComponent(urlString)
