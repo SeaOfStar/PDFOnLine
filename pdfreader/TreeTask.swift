@@ -19,8 +19,8 @@ class TreeTask: NSObject, NSURLSessionDelegate {
 
     let 最大同时下载数量 = 5
 
-    static let defaultString = "http://192.168.144.44:8080/bpm_wechat/bpmclient/getFileInfo.json"
-//    static let defaultString = "http://112.124.23.78:18080/bpm_wechat/bpmclient/getFileInfo.json"
+//    static let defaultString = "http://192.168.144.44:8080/bpm_wechat/bpmclient/getFileInfo.json"
+    static let defaultString = "http://112.124.23.78:18080/bpm_wechat/bpmclient/getFileInfo.json"
     let serverURL: NSURL = NSURL(string: TreeTask.defaultString)!
 
     weak var delegate: TreeTaskDelegate?
